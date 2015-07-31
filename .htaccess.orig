@@ -1,0 +1,46 @@
+# BEGIN iThemes Security - Do not modify or remove this line
+# iThemes Security Config Details: 2
+	# Enable the hide backend feature - Security > Settings > Hide Login Area > Hide Backend
+	RewriteRule ^(/katemorgan/)?xmarketing/?$ /katemorgan/wp-login.php [QSA,L]
+
+	# Disable XML-RPC - Security > Settings > WordPress Tweaks > XML-RPC
+	<files xmlrpc.php>
+		<IfModule mod_authz_core.c>
+			Require all denied
+		</IfModule>
+		<IfModule !mod_authz_core.c>
+			Order allow,deny
+			Deny from all
+		</IfModule>
+	</files>
+
+	<IfModule mod_rewrite.c>
+		RewriteEngine On
+
+		# Reduce Comment Spam - Security > Settings > System Tweaks > Comment Spam
+		RewriteCond %{REQUEST_METHOD} POST
+		RewriteCond %{REQUEST_URI} /wp-comments-post\.php$
+		RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+		RewriteCond %{HTTP_REFERER} !^https?://(([^/]+\.)?com\.au|jetpack\.wordpress\.com/jetpack-comment)(/|$) [NC]
+		RewriteRule ^.* - [F]
+	</IfModule>
+# END iThemes Security - Do not modify or remove this line
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /katemorgan/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /katemorgan/index.php [L]
+</IfModule>
+
+# END WordPress
+
+# BEGIN Sandbox
+# END Sandbox
+AuthType Basic
+AuthName "katemorgan"
+AuthUserFile "/home/devxmarketingcom/.htpasswds/public_html/katemorgan/passwd"
+require valid-user
