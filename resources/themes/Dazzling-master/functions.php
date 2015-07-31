@@ -22,7 +22,6 @@ function dazzling_content_width() {
   }
 }
 //add_action( 'template_redirect', 'dazzling_content_width' );
-
 if ( ! function_exists( 'dazzling_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -459,6 +458,12 @@ function filter_plugin_updates( $value ) {
 	if($value->response['woocommerce-product-sort-and-display/wc-psad.php']){
     	unset( $value->response['woocommerce-product-sort-and-display/wc-psad.php'] );
 	}
+	
+	
+	if( $value->response['addon-so-widgets-bundle/addon-so-widgets-bundle.php'] ){
+    	unset( $value->response['addon-so-widgets-bundle/addon-so-widgets-bundle.php'] );
+	}	
+
     return $value;
 }
 add_filter( 'site_transient_update_plugins', 'filter_plugin_updates' );

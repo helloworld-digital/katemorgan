@@ -1,681 +1,2390 @@
-<?php
-/**
- * Dazzling functions and definitions
- *
- * @package dazzling
- */
-
-/**
- * Set the content width based on the theme's design and stylesheet.
- */
-if ( ! isset( $content_width ) ) {
-	$content_width = 730; /* pixels */
-}
-
-/**
- * Set the content width for full width pages with no sidebar.
- */
-function dazzling_content_width() {
-  if ( is_page_template( 'page-fullwidth.php' ) || is_page_template( 'front-page.php' ) ) {
-    global $content_width;
-    $content_width = 1110; /* pixels */
-  }
-}
-//add_action( 'template_redirect', 'dazzling_content_width' );
-
-if ( ! function_exists( 'dazzling_setup' ) ) :
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- */
-function dazzling_setup() {
-
-  /*
-   * Make theme available for translation.
-   * Translations can be filed in the /languages/ directory.
-   * If you're building a theme based on Dazzling, use a find and replace
-   * to change 'dazzling' to the name of your theme in all the template files
-   */
-  load_theme_textdomain( 'dazzling', get_template_directory() . '/languages' );
-
-  // Add default posts and comments RSS feed links to head.
-  add_theme_support( 'automatic-feed-links' );
-
-  /*
-   * Enable support for Post Thumbnails on posts and pages.
-   *
-   * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
-   */
-  add_theme_support( 'post-thumbnails' );
-
-  add_image_size( 'dazzling-featured', 730, 410, true );
-  add_image_size( 'tab-small', 60, 60 , true); // Small Thumbnail
-
-  // This theme uses wp_nav_menu() in one location.
-  register_nav_menus( array(
-    'primary'      => __( 'Primary Menu', 'dazzling' ),
-    'footer-links' => __( 'Footer Links', 'dazzling' ),
-     'secondary' => __( 'Secondary Menu', 'dazzling' ),//z secondary menu in footer
-  ) );
-
-  // Enable support for Post Formats.
-  add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
-
-  // Setup the WordPress core custom background feature.
-  add_theme_support( 'custom-background', apply_filters( 'dazzling_custom_background_args', array(
-  	'default-color' => 'ffffff',
-  	'default-image' => '',
-  ) ) );
-
-  /*
-   * Let WordPress manage the document title.
-   * By adding theme support, we declare that this theme does not use a
-   * hard-coded <title> tag in the document head, and expect WordPress to
-   * provide it for us.
-   */
-  add_theme_support( 'title-tag' );
-}
-endif; // dazzling_setup
-add_action( 'after_setup_theme', 'dazzling_setup' );
-
-/**
- * Register widgetized area and update sidebar with default widgets.
- */
-function dazzling_widgets_init() {
-  register_sidebar( array(
-    'name'          => __( 'Sidebar', 'dazzling' ),
-    'id'            => 'sidebar-1',
-    'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-    'after_widget'  => '</aside>',
-    'before_title'  => '<h3 class="widget-title">',
-    'after_title'   => '</h3>',
-  ) );
-  register_sidebar(array(
-    'id'            => 'home-widget-1',
-    'name'          => __( 'Homepage Widget 1', 'dazzling' ),
-    'description'   => __( 'Displays on the Home Page', 'dazzling' ),
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
-    'after_widget'  => '</div>',
-    'before_title'  => '<h3 class="widgettitle">',
-    'after_title'   => '</h3>',
-  ));
-
-  register_sidebar(array(
-    'id'            => 'home-widget-2',
-    'name'          =>  __( 'Homepage Widget 2', 'dazzling' ),
-    'description'   => __( 'Displays on the Home Page', 'dazzling' ),
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
-    'after_widget'  => '</div>',
-    'before_title'  => '<h3 class="widgettitle">',
-    'after_title'   => '</h3>',
-  ));
-
-  register_sidebar(array(
-    'id'            => 'home-widget-3',
-    'name'          =>  __( 'Homepage Widget 3', 'dazzling' ),
-    'description'   =>  __( 'Displays on the Home Page', 'dazzling' ),
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
-    'after_widget'  => '</div>',
-    'before_title'  => '<h3 class="widgettitle">',
-    'after_title'   => '</h3>',
-  ));
-
-  register_sidebar(array(
-    'id'            => 'footer-widget-1',
-    'name'          =>  __( 'Footer Widget 1', 'dazzling' ),
-    'description'   =>  __( 'Used for footer widget area', 'dazzling' ),
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
-    'after_widget'  => '</div>',
-    'before_title'  => '<h3 class="widgettitle">',
-    'after_title'   => '</h3>',
-  ));
-
-  register_sidebar(array(
-    'id'            => 'footer-widget-2',
-    'name'          =>  __( 'Footer Widget 2', 'dazzling' ),
-    'description'   =>  __( 'Used for footer widget area', 'dazzling' ),
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
-    'after_widget'  => '</div>',
-    'before_title'  => '<h3 class="widgettitle">',
-    'after_title'   => '</h3>',
-  ));
-
-  register_sidebar(array(
-    'id'            => 'footer-widget-3',
-    'name'          =>  __( 'Footer Widget 3', 'dazzling' ),
-    'description'   =>  __( 'Used for footer widget area', 'dazzling' ),
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
-    'after_widget'  => '</div>',
-    'before_title'  => '<h3 class="widgettitle">',
-    'after_title'   => '</h3>',
-  ));
-
-
-  register_sidebar(array(
-    'id'            => 'footer-widget-4',
-    'name'          =>  __( 'Footer Widget 4', 'dazzling' ),
-    'description'   =>  __( 'Used for footer widget area', 'dazzling' ),
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
-    'after_widget'  => '</div>',
-    'before_title'  => '<h3 class="widgettitle">',
-    'after_title'   => '</h3>',
-  ));
-
-
-  register_widget( 'dazzling_popular_posts_widget' );
-}
-add_action( 'widgets_init', 'dazzling_widgets_init' );
-
-include(get_template_directory() . "/inc/popular-posts-widget.php");
-
-
-/**
- * Enqueue scripts and styles.
- */
-function dazzling_scripts() {
-
-  wp_enqueue_style( 'dazzling-bootstrap', get_template_directory_uri() . '/inc/css/bootstrap.min.css' );
-
-  wp_enqueue_style( 'dazzling-icons', get_template_directory_uri().'/inc/css/font-awesome.min.css' );
-
-  if( ( is_home() || is_front_page() ) && of_get_option('dazzling_slider_checkbox') == 1 ) {
-  	wp_enqueue_style( 'flexslider-css', get_template_directory_uri().'/inc/css/flexslider.css' );
-  }
-
-  if ( class_exists( 'jigoshop' ) ) { // Jigoshop specific styles loaded only when plugin is installed
-    wp_enqueue_style( 'jigoshop-css', get_template_directory_uri().'/inc/css/jigoshop.css' );
-  }
-
-  wp_enqueue_style( 'dazzling-style', get_stylesheet_uri() );
-
-  wp_enqueue_script('dazzling-bootstrapjs', get_template_directory_uri().'/inc/js/bootstrap.min.js', array('jquery') );
-
-  if( ( is_home() || is_front_page() ) && of_get_option('dazzling_slider_checkbox') == 1 ) {
-  	wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/inc/js/flexslider.min.js', array('jquery'), '2.4.0', true );
-  }
-
-  wp_enqueue_script( 'dazzling-main', get_template_directory_uri() . '/inc/js/main.js', array('jquery') );
-
-  if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-  	wp_enqueue_script( 'comment-reply' );
-  }
-}
-add_action( 'wp_enqueue_scripts', 'dazzling_scripts' );
-
-/**
- * Add HTML5 shiv and Respond.js for IE8 support of HTML5 elements and media queries
- */
-function dazzling_ie_support_header() {
-  echo '<!--[if lt IE 9]>'. "\n";
-  echo '<script src="' . esc_url( get_template_directory_uri() . '/inc/js/html5shiv.min.js' ) . '"></script>'. "\n";
-  echo '<script src="' . esc_url( get_template_directory_uri() . '/inc/js/respond.min.js' ) . '"></script>'. "\n";
-  echo '<![endif]-->'. "\n";
-}
-add_action( 'wp_head', 'dazzling_ie_support_header', 11 );
-
 /*
- * Loads the Options Panel
- *
- * If you're loading from a child theme use stylesheet_directory
- * instead of template_directory
- */
-define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/admin/' );
-require_once dirname( __FILE__ ) . '/inc/admin/options-framework.php';
-// Loads options.php from child or parent theme
-$optionsfile = locate_template( 'options.php' );
-load_template( $optionsfile );
+Theme Name: Kate Morgan
+Theme URI: http://xmarketing.com.au
+Author: Xian Yang Wong
+Author URI: http://xmarketing.com.au
+Description: Kate Morgan Responsive Templates by X Marketing Group Pty. Ltd.
+Version: 1.0.0
 
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
+*/
 
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
 
-/**
- * Custom functions that act independently of the theme templates.
- */
-require get_template_directory() . '/inc/extras.php';
+/* Table of content
+-----------------------------------------------
+1. Global
+2. Content
+3. Post styling
+4. Singe Post/Page Pagination
+5. Media
+6. Widgets
+7. Buttons
+8. Infinite Scroll
+8. Custom Styles
+9. Navigation
+10. Comments
+11. Attachment styling
+12. Footer
+13. Mobile Styling
+14. Social icons
+15. Call For Action
+16. Custom CSS
+*/
 
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
 
-/**
- * Load Jetpack compatibility file.
- */
-require get_template_directory() . '/inc/jetpack.php';
+/* =Global
+----------------------------------------------- */
 
-/**
- * Load custom nav walker
- */
-require get_template_directory() . '/inc/navwalker.php';
 
-if ( class_exists( 'woocommerce' ) ) {
-/**
- * WooCommerce related functions
- */
-require get_template_directory() . '/inc/woo-setup.php';
+/* #### Generated By: http://www.cufonfonts.com #### */
+*:focus {
+    outline: none;
+}
+@font-face {
+    font-family: 'Avenir LT Std 95 Black';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 95 Black'), url('font/AvenirLTStd-Black.woff') format('woff');
 }
 
-if ( class_exists( 'jigoshop' ) ) {
-/**
- * Jigoshop related functions
- */
-require get_template_directory() . '/inc/jigoshop-setup.php';
+@font-face {
+    font-family: 'Avenir LT Std 45 Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 45 Book'), url('font/AvenirLTStd-Book.woff') format('woff');
 }
 
-function the_breadcrumb () {
-     
-    // Settings
-    $separator  = '&#47;';
-    $id         = 'breadcrumbs';
-    $class      = 'breadcrumbs';
-    $home_title = 'Home';
-     
-    // Get the query & post information
-    global $post,$wp_query;
-    $category = get_the_category();
-     
-    // Build the breadcrums
-    echo '<ul id="' . $id . '" class="' . $class . '">';
-     
-    // Do not display on the homepage
-    if ( !is_front_page() ) {
-         
-        // Home page
-        echo '<li class="item-home"><a class="bread-link bread-home" href="' . get_home_url() . '" title="' . $home_title . '">' . $home_title . '</a></li>';
-        echo '<li class="separator separator-home"> ' . $separator . ' </li>';
-         
-        if ( is_single() ) {
-             
-            // Single post (Only display the first category)
-            echo '<li class="item-cat item-cat-' . $category[0]->term_id . ' item-cat-' . $category[0]->category_nicename . '"><a class="bread-cat bread-cat-' . $category[0]->term_id . ' bread-cat-' . $category[0]->category_nicename . '" href="' . get_category_link($category[0]->term_id ) . '" title="' . $category[0]->cat_name . '">' . $category[0]->cat_name . '</a></li>';
-            echo '<li class="separator separator-' . $category[0]->term_id . '"> ' . $separator . ' </li>';
-            echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '" title="' . get_the_title() . '">' . get_the_title() . '</strong></li>';
-             
-        } else if ( is_category() ) {
-             
-            // Category page
-            echo '<li class="item-current item-cat-' . $category[0]->term_id . ' item-cat-' . $category[0]->category_nicename . '"><strong class="bread-current bread-cat-' . $category[0]->term_id . ' bread-cat-' . $category[0]->category_nicename . '">' . $category[0]->cat_name . '</strong></li>';
-             
-        } else if ( is_page() ) {
-             
-            // Standard page
-            if( $post->post_parent ){
-                 
-                // If child page, get parents 
-                $anc = get_post_ancestors( $post->ID );
-                 
-                // Get parents in the right order
-                $anc = array_reverse($anc);
-                 
-                // Parent page loop
-                foreach ( $anc as $ancestor ) {
-                    $parents .= '<li class="item-parent item-parent-' . $ancestor . '"><a class="bread-parent bread-parent-' . $ancestor . '" href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a></li>';
-                    $parents .= '<li class="separator separator-' . $ancestor . '"> ' . $separator . ' </li>';
-                }
-                 
-                // Display parent pages
-                echo $parents;
-                 
-                // Current page
-                echo '<li class="item-current item-' . $post->ID . '"><strong title="' . get_the_title() . '"> ' . get_the_title() . '</strong></li>';
-                 
-            } else {
-                 
-                // Just display current page if not parents
-                echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '"> ' . get_the_title() . '</strong></li>';
-                 
-            }
-             
-        } else if ( is_tag() ) {
-             
-            // Tag page
-             
-            // Get tag information
-            $term_id = get_query_var('tag_id');
-            $taxonomy = 'post_tag';
-            $args ='include=' . $term_id;
-            $terms = get_terms( $taxonomy, $args );
-             
-            // Display the tag name
-            echo '<li class="item-current item-tag-' . $terms[0]->term_id . ' item-tag-' . $terms[0]->slug . '"><strong class="bread-current bread-tag-' . $terms[0]->term_id . ' bread-tag-' . $terms[0]->slug . '">' . $terms[0]->name . '</strong></li>';
-         
-        } elseif ( is_day() ) {
-             
-            // Day archive
-             
-            // Year link
-            echo '<li class="item-year item-year-' . get_the_time('Y') . '"><a class="bread-year bread-year-' . get_the_time('Y') . '" href="' . get_year_link( get_the_time('Y') ) . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . ' Archives</a></li>';
-            echo '<li class="separator separator-' . get_the_time('Y') . '"> ' . $separator . ' </li>';
-             
-            // Month link
-            echo '<li class="item-month item-month-' . get_the_time('m') . '"><a class="bread-month bread-month-' . get_the_time('m') . '" href="' . get_month_link( get_the_time('Y'), get_the_time('m') ) . '" title="' . get_the_time('M') . '">' . get_the_time('M') . ' Archives</a></li>';
-            echo '<li class="separator separator-' . get_the_time('m') . '"> ' . $separator . ' </li>';
-             
-            // Day display
-            echo '<li class="item-current item-' . get_the_time('j') . '"><strong class="bread-current bread-' . get_the_time('j') . '"> ' . get_the_time('jS') . ' ' . get_the_time('M') . ' Archives</strong></li>';
-             
-        } else if ( is_month() ) {
-             
-            // Month Archive
-             
-            // Year link
-            echo '<li class="item-year item-year-' . get_the_time('Y') . '"><a class="bread-year bread-year-' . get_the_time('Y') . '" href="' . get_year_link( get_the_time('Y') ) . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . ' Archives</a></li>';
-            echo '<li class="separator separator-' . get_the_time('Y') . '"> ' . $separator . ' </li>';
-             
-            // Month display
-            echo '<li class="item-month item-month-' . get_the_time('m') . '"><strong class="bread-month bread-month-' . get_the_time('m') . '" title="' . get_the_time('M') . '">' . get_the_time('M') . ' Archives</strong></li>';
-             
-        } else if ( is_year() ) {
-             
-            // Display year archive
-            echo '<li class="item-current item-current-' . get_the_time('Y') . '"><strong class="bread-current bread-current-' . get_the_time('Y') . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . ' Archives</strong></li>';
-             
-        } else if ( is_author() ) {
-             
-            // Auhor archive
-             
-            // Get the author information
-            global $author;
-            $userdata = get_userdata( $author );
-             
-            // Display author name
-            echo '<li class="item-current item-current-' . $userdata->user_nicename . '"><strong class="bread-current bread-current-' . $userdata->user_nicename . '" title="' . $userdata->display_name . '">' . 'Author: ' . $userdata->display_name . '</strong></li>';
-         
-        } else if ( get_query_var('paged') ) {
-             
-            // Paginated archives
-            echo '<li class="item-current item-current-' . get_query_var('paged') . '"><strong class="bread-current bread-current-' . get_query_var('paged') . '" title="Page ' . get_query_var('paged') . '">'.__('Page') . ' ' . get_query_var('paged') . '</strong></li>';
-             
-        } else if ( is_search() ) {
-         
-            // Search results page
-            echo '<li class="item-current item-current-' . get_search_query() . '"><strong class="bread-current bread-current-' . get_search_query() . '" title="Search results for: ' . get_search_query() . '">Search results for: ' . get_search_query() . '</strong></li>';
-         
-        } elseif ( is_404() ) {
-             
-            // 404 page
-            echo '<li>' . 'Error 404' . '</li>';
-        }
-         
+@font-face {
+    font-family: 'Avenir LT Std 85 Heavy';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 85 Heavy'), url('font/AvenirLTStd-Heavy.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Avenir LT Std 35 Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 35 Light'), url('font/AvenirLTStd-Light.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Avenir LT Std 65 Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 65 Medium'), url('font/AvenirLTStd-Medium.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Avenir LT Std 55 Roman';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 55 Roman'), url('font/AvenirLTStd-Roman.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Avenir LT Std 95 Black Oblique';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 95 Black Oblique'), url('font/AvenirLTStd-BlackOblique.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Avenir LT Std 45 Book Oblique';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 45 Book Oblique'), url('font/AvenirLTStd-BookOblique.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Avenir LT Std 85 Heavy Oblique';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 85 Heavy Oblique'), url('font/AvenirLTStd-HeavyOblique.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Avenir LT Std 35 Light Oblique';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 35 Light Oblique'), url('font/AvenirLTStd-LightOblique.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Avenir LT Std 65 Medium Oblique';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 65 Medium Oblique'), url('font/AvenirLTStd-MediumOblique.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Avenir LT Std 55 Oblique';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Avenir LT Std 55 Oblique'), url('font/AvenirLTStd-Oblique.woff') format('woff');
+}
+
+body {
+    color: #6B6B6B;
+    word-wrap: break-word;
+    line-height: 1.7;
+    font-size: 14px;
+    font-family: 'Avenir LT Std 35 Light';
+    font-weight: normal;
+}
+
+a {
+    color: #553588;
+    text-decoration: none;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+a:hover,
+a:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+a:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    color: #1FA67A;
+}
+
+h1.pbc_title {
+    margin-top: 0;
+    margin-bottom: 5px
+}
+
+h1,
+.h1 {
+    font-size: 32px;
+}
+
+h2,
+.h2 {
+    color: #553588;
+    font-size: 3em;
+    font-family: 'Avenir LT Std 35 Light';
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+h3,
+.h3 {
+    font-size: 23px;
+    font-family: 'museo-slab', serif;
+    font-style: italic;
+    color: #0a0a0a;
+}
+
+.textwidget h3{
+	margin-top: 0px;
+}
+
+h4,
+.h4 {
+    font-size: 18px;
+}
+
+h5,
+.h5 {
+    font-size: 16px;
+}
+
+h6,
+.h6 {
+    font-size: 14px;
+}
+
+img {
+    height: auto;
+    /* Make sure images are scaled correctly. */
+    max-width: 100%;
+    /* Adhere to container width. */
+}
+
+strong {
+    font-family: 'Avenir LT Std 65 Medium';
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%;
+    /* Corrects font size not being inherited in all browsers */
+    margin: 0;
+    /* Addresses margins set differently in IE6/7, F3/4, S5, Chrome */
+    vertical-align: baseline;
+    /* Improves appearance and consistency in all browsers */
+    *vertical-align: middle;
+    /* Improves appearance and consistency in all browsers */
+}
+
+select {
+    width: 250px;
+    border: 1px solid #DCE4EC;
+    background-color: #FFF;
+    height: 30px;
+    padding: 5px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    padding: 0;
+    /* Addresses excess padding in IE8/9 */
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+    /* Addresses appearance set to searchfield in S5, Chrome */
+    -webkit-box-sizing: content-box;
+    /* Addresses box sizing set to border-box in S5, Chrome (include -moz to future-proof) */
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-decoration {
+    /* Corrects inner padding displayed oddly in S5, Chrome on OSX */
+    -webkit-appearance: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    /* Corrects inner padding and border displayed oddly in FF3/4 www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
+    border: 0;
+    padding: 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+textarea {
+    color: #666;
+    border: 1px solid #E8E8E8;
+    border-radius: 3px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+    color: #111;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"] {
+    padding: 3px;
+}
+
+input[type="submit"],
+input[type="button"] {
+    background-color: #3f9c35;
+    color: white;
+    font-family: 'Avenir LT Std 35 Light';
+    font-weight: normal;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 0px solid black;
+    height: 43px;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: #3f9c35;
+    color: white;
+    font-family: 'Avenir LT Std 35 Light';
+    font-weight: normal;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 0px solid black;
+    height: 43px;
+}
+
+textarea {
+    overflow: auto;
+    /* Removes default vertical scrollbar in IE6/7/8/9 */
+    padding-left: 3px;
+    vertical-align: top;
+    /* Improves readability and alignment in all browsers */
+    width: 100%;
+}
+
+table {
+    font-size: 12px;
+}
+
+table h3 {
+    margin-top: 10px;
+}
+
+
+/* Alignment */
+
+.alignleft {
+    display: inline;
+    float: left;
+    margin-right: 20px;
+    padding-bottom: 20px;
+}
+
+.alignright {
+    display: inline;
+    float: right;
+    margin-left: 1.5em;
+}
+
+.aligncenter {
+    clear: both;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* Text meant only for screen readers */
+
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+}
+
+.screen-reader-text:hover,
+.screen-reader-text:active,
+.screen-reader-text:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    color: #21759b;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+    /* Above WP toolbar */
+}
+
+
+/* Clearing */
+
+.clear:before,
+.clear:after,
+.entry-content:before,
+.entry-content:after,
+.comment-content:before,
+.comment-content:after,
+.site-header:before,
+.site-header:after,
+.site-content:before,
+.site-content:after,
+.site-footer:before,
+.site-footer:after {
+    content: '';
+    display: table;
+}
+
+.clear:after,
+.entry-content:after,
+.comment-content:after,
+.site-header:after,
+.site-content:after,
+.site-footer:after {
+    clear: both;
+}
+
+
+/* =Content
+----------------------------------------------- */
+
+.sticky {}
+
+.hentry {
+    margin: 0;
+}
+
+.byline,
+.updated {
+    display: none;
+}
+
+.single .byline,
+.group-blog .byline {
+    display: inline;
+    margin-right: 0;
+}
+
+.page-content,
+.entry-content,
+.entry-summary {
+    margin: 1.5em 0 0;
+    font-family: 'Avenir LT Std 35 Light' !important;
+    color: black !important;
+}
+
+.entry-content {
+    margin-top: 0px;
+}
+
+.page-links {
+    clear: both;
+    margin: 0 0 1.5em;
+}
+
+#content {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+/* =Post styling
+----------------------------------------------- */
+
+.entry-meta a {
+    font-size: 13px;
+}
+
+#main .page-header {
+    margin-top: 0;
+}
+
+.entry-meta a {
+    color: #6B6B6B;
+}
+
+.entry-meta .fa {
+    font-size: 14px;
+    margin-right: 3px;
+    color: #1FA67A;
+}
+
+.entry-meta span {
+    margin-right: 10px;
+}
+
+.entry-title {
+    font-size: 40px;
+    color: white;
+    font-weight: normal;
+    padding: 20px 0px;
+}
+
+.entry-title a {
+    color: #444;
+}
+
+.entry-title a:hover {
+    color: #666;
+}
+
+.btn.btn-default.read-more {
+    float: right;
+    border: 1px solid #E8E8E8;
+    color: #1FA67A;
+    background-color: transparent;
+    margin-top: 10px;
+}
+
+.btn.btn-default.read-more:hover {
+    color: #FFF;
+    background-color: #1FA67A;
+}
+
+.search .btn.btn-default.read-more {
+    float: none;
+}
+
+hr.section-divider {
+    border-color: #E8E8E8;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
+/* =Singe Post/Page Pagination
+----------------------------------------------- */
+
+.page-links span {
+    display: inline-block;
+    color: #fff;
+    background-color: #1FA67A;
+    border-radius: 4px;
+    padding: 2px 10px;
+    margin-left: 2px;
+}
+
+.page-links a span {
+    background-color: inherit;
+    border: 1px solid #E8E8E8;
+    color: #1FA67A;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.page-links a:hover span {
+    background-color: #1FA67A;
+    border: 1px solid #1FA67A;
+    color: #fff;
+}
+
+
+/* =Asides
+----------------------------------------------- */
+
+.blog .format-aside .entry-title,
+.archive .format-aside .entry-title {
+    display: none;
+}
+
+
+/* =Media
+----------------------------------------------- */
+
+.page-content img.wp-smiley,
+.entry-content img.wp-smiley,
+.comment-content img.wp-smiley {
+    border: none;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0;
+}
+
+.wp-caption {
+    border: 1px solid #ccc;
+    margin-bottom: 1.5em;
+    max-width: 100%;
+}
+
+.wp-caption img[class*="wp-image-"] {
+    display: block;
+}
+
+.wp-caption-text {
+    text-align: center;
+}
+
+.wp-caption .wp-caption-text {
+    margin: 0.8075em 0;
+}
+
+.site-main .gallery {
+    margin-bottom: 1.5em;
+}
+
+.gallery-caption {}
+
+.site-main .gallery a img {
+    border: none;
+    height: auto;
+    max-width: 90%;
+}
+
+.site-main .gallery dd {
+    margin: 0;
+}
+
+.site-main .gallery-columns-4 .gallery-item {}
+
+.site-main .gallery-columns-4 .gallery-item img {}
+
+
+/* Make sure embeds and iframes fit their containers */
+
+embed,
+iframe,
+object {
+    max-width: 100%;
+}
+
+
+/* =Widgets
+----------------------------------------------- */
+
+.widget {
+    margin: 0 0 1.5em;
+}
+
+
+/* Make sure select elements fit in widgets */
+
+.widget select {
+    max-width: 100%;
+}
+
+
+/* Search widget */
+
+.widget_search .search-submit {
+    display: none;
+}
+
+.widget > ul > li,
+li.recentcomments {
+    border-bottom: 1px solid #EEE;
+    position: relative;
+    display: block;
+    padding: 10px 0;
+}
+
+
+.widget ul li {
+    list-style: none !important;
+}
+
+.widget-title {
+    border-bottom: 1px solid #eee;
+}
+
+.widget ul.nav.nav-tabs {
+    padding: 0;
+}
+
+.tab-content ul li {
+    list-style: none;
+}
+
+#secondary .widget_archive ul li:before,
+#secondary .widget_categories ul li:before,
+#secondary .widget_recent_comments ul li:before {
+    font-family: fontawesome;
+    margin-right: 10px;
+}
+
+#secondary .widget_archive ul li:before {
+    content: '\f073';
+}
+
+#secondary .widget_categories ul li:before {
+    content: '\f115';
+}
+
+#secondary .widget_recent_comments ul li:before {
+    content: '\f0e5';
+}
+
+.tab-content .tab-thumb {
+    float: left;
+    margin-right: 8px;
+    padding-top: 5px;
+    float: left;
+    line-height: 0px;
+    width: 60px;
+    height: 60px;
+}
+
+.tab-content li {
+    overflow: hidden;
+    list-style: none;
+    border-bottom: 1px solid #f0f0f0;
+    margin: 0 0 8px;
+    padding: 0 0 6px;
+}
+
+.tab-content .tab-entry {
+    display: block;
+}
+
+.tab-content > .active {
+    border: 1px solid #E8E8E8;
+    border-top: none;
+}
+
+.tab-content ul li:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.tab-content .tab-entry {
+    font-size: 14px
+}
+
+.tab-comment {
+    font-size: 18px;
+    padding: 0 10px;
+}
+
+.nav-tabs > li > a {
+    border-bottom-color: transparent;
+    text-transform: uppercase;
+    font-size: 24px;
+}
+
+.tab-content i {
+    font-size: 12px;
+}
+
+.tab-thumb.thumbnail {
+    margin-bottom: 5px;
+}
+
+.tab-content #messages li:before {
+    content: '\f0e5';
+    font-family: fontawesome;
+    float: left;
+    padding-right: 10px;
+    font-size: 20px;
+    color: #1FA67A;
+}
+
+
+/* =Buttons
+----------------------------------------------- */
+
+.btn-default,
+.label-default {
+    background-color: #1FA67A;
+    border-color: #1FA67A;
+}
+
+.btn-default:hover,
+.label-default[href]:hover,
+.label-default[href]:focus,
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+#image-navigation .nav-previous a:hover,
+#image-navigation .nav-next a:hover {
+    background-color: #1b926c;
+    border-color: #1b926c;
+}
+
+.btn.btn-default {
+    color: #FFF;
+}
+
+
+/* =Infinite Scroll
+----------------------------------------------- */
+
+
+/* Globally hidden elements when Infinite Scroll is supported and in use. */
+
+.infinite-scroll .paging-navigation,
+
+/* Older / Newer Posts Navigation (always hidden) */
+
+.infinite-scroll.neverending .site-footer {
+    /* Theme Footer (when set to scrolling) */
+    display: none;
+}
+
+
+/* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before */
+
+.infinity-end.neverending .site-footer {
+    display: block;
+}
+
+#infinite-handle span {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #E8E8E8;
+    color: #1FA67A;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+#infinite-handle span:hover {
+    background-color: #1FA67A;
+    color: #fff;
+}
+
+.woocommerce #infinite-handle {
+    display: none;
+}
+
+.woocommerce div.product form.cart .variations label {
+    color: #6B6B6B;
+    font-size: 14px;
+    margin-bottom: 0;
+    margin-top: 8px;
+}
+
+
+/* =Custom Styles
+----------------------------------------------- */
+
+.site-branding {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.site-description {
+    color: #777;
+    font-weight: 200;
+    font-size: 16px;
+}
+
+.page-template-page-homepage-php .carousel {
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+
+
+/* =Navigation
+----------------------------------------------- */
+
+.site-main [class*="navigation"] a,
+.more-link {
+    border: 1px solid #E8E8E8;
+    padding: 6px 12px;
+    border-radius: 4px;
+    display: block;
+}
+
+.site-main [class*="navigation"] a:hover,
+.more-link:hover {
+    color: #fff;
+    background: #1FA67A;
+    text-decoration: none;
+}
+
+.more-link {
+    float: right;
+    margin: 10px 0;
+}
+
+.site-main [class*="navigation"] {
+    margin: 0 0 1.5em;
+    overflow: hidden;
+}
+
+[class*="navigation"] .nav-previous {
+    float: left;
+}
+
+[class*="navigation"] .nav-next {
+    float: right;
+    text-align: right;
+}
+
+.navbar.navbar-default {
+    background-color: #fff;
+    font-weight: 200;
+    margin-bottom: 0;
+    margin-top: -2px;
+    border-bottom: 1px solid #eee;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #543586;
+    line-height: 30px;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 10px 10px;
+}
+
+.navbar > .container .navbar-brand {
+    color: #1FA67A;
+    font-size: 24px;
+    margin: 8px 0;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    border-right: none;
+    border-left: none;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-default {
+    border: none;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #fff;
+    background-color: #1FA67A;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #999;
+}
+
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu > li > a {
+    padding: 14px 20px;
+    color: #999;
+}
+
+.dropdown-menu,
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+    border: none;
+}
+
+.dropdown-menu > .active > a,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a {
+    background-color: #1FA67A;
+    color: #fff;
+}
+
+.dropdown-menu .divider {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav > li > .dropdown-menu {
+    padding: 0;
+}
+
+.navbar-nav > li > a {
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: transparent;
+}
+
+.nav.navbar-nav {
+    float: right;
+}
+
+@media (max-width: 767px) {
+    .nav.navbar-nav {
+        float: none;
     }
-     
-    echo '</ul>';
-     
-}
-//woocommerce get lowest price in category
-function wpq_get_min_price_per_product_cat( $term_id ) {
-
-  global $wpdb;
-
-  $sql = "
-
-    SELECT  MIN( meta_value+0 ) as minprice
-
-    FROM {$wpdb->posts} 
-
-    INNER JOIN {$wpdb->term_relationships} ON ({$wpdb->posts}.ID = {$wpdb->term_relationships}.object_id)
-
-    INNER JOIN {$wpdb->postmeta} ON ({$wpdb->posts}.ID = {$wpdb->postmeta}.post_id) 
-
-    WHERE  
-
-      ( {$wpdb->term_relationships}.term_taxonomy_id IN (%d) ) 
-
-    AND {$wpdb->posts}.post_type = 'product' 
-
-    AND {$wpdb->posts}.post_status = 'publish' 
-
-    AND {$wpdb->postmeta}.meta_key = '_price'
-
-  ";
-
-  return $wpdb->get_var( $wpdb->prepare( $sql, $term_id ) );
-
 }
 
-/*
- * wc_remove_related_products
- * 
- * Clear the query arguments for related products so none show.
- * Add this code to your theme functions.php file.  
- */
-function wc_remove_related_products( $args ) {
-  return array();
+#breadcrumbs {
+    list-style: none;
+    margin: 20px 0 0 0;
+    overflow: hidden;
+    padding-left: 15px;
+    margin-bottom: 20px;
 }
-add_filter('woocommerce_related_products_args','wc_remove_related_products', 10); 
 
-function filter_plugin_updates( $value ) {
+#breadcrumbs li {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+}
 
-	if($value->response['woocommerce-product-sort-and-display/wc-psad.php']){
-    	unset( $value->response['woocommerce-product-sort-and-display/wc-psad.php'] );
+#breadcrumbs .separator {
+    font-size: 18px;
+    font-weight: 100;
+    color: #ccc;
+}
+
+.bread-current {
+    color: #543586;
+}
+
+
+/* =Comments
+----------------------------------------------- */
+
+.comment-content a {
+    word-wrap: break-word;
+}
+
+.bypostauthor {}
+
+#respond {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    padding: 0px !important;
+}
+
+#respond > p,
+#respond p.comment-notes,
+p.logged-in-as {
+    margin-bottom: 10px;
+}
+
+p.logged-in-as {
+    padding-bottom: 0px;
+}
+
+.comment-list {
+    margin-bottom: 40px !important;
+    margin-left: 0px !important;
+    padding-left: 0;
+}
+
+.comment .comment-body {
+    background-color: #ffffff;
+    margin: 0;
+    overflow: hidden;
+    padding: 25px;
+    margin-top: 2em;
+    padding-left: 116px;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-color: #E8E8E8;
+    border-radius: 4px;
+}
+
+.comment-list .children {
+    margin-left: 0px!important;
+    padding-left: 40px;
+    border-left: 1px solid #E8E8E8;
+    background-repeat: no-repeat;
+    background-position: left 20px;
+}
+
+.comment-list li.comment > div img.avatar {
+    position: absolute;
+    left: 29px;
+    top: 29px;
+}
+
+#comment-form-title {
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+
+.vcard .avatar {
+    position: absolute;
+    left: 29px;
+    top: 29px;
+}
+
+.comment-metadata {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 10px;
+}
+
+.comment-reply-link {
+    float: right;
+}
+
+.form-allowed-tags code {
+    word-wrap: break-word;
+    white-space: inherit;
+}
+
+.comment-respond label {
+    display: block;
+    font-weight: normal;
+}
+
+.comment-respond .required {
+    color: #C7254E;
+}
+
+
+/* =Attachment styling
+----------------------------------------------- */
+
+#image-navigation .nav-previous a,
+#image-navigation .nav-next a {
+    padding: 5px 20px;
+    border: 1px solid #E8E8E8;
+    border-radius: 4px;
+    display: block;
+}
+
+#image-navigation .nav-previous a:hover,
+#image-navigation .nav-next a:hover {
+    background-color: #1FA67A;
+    color: #fff;
+}
+
+#image-navigation .nav-previous,
+#image-navigation .nav-next {
+    margin: 10px 0;
+}
+
+
+/* =Footer
+----------------------------------------------- */
+
+#footer-area {
+    background-color: #626365;
+    color: #CCC;
+    font-size: 12px;
+}
+
+#footer-area a {
+    color: #ccc;
+}
+
+#footer-area .footer-widget-area {
+    padding: 40px 0 20px 0;
+    overflow: hidden;
+}
+
+#footer-area ul li {
+    border-bottom: 0px solid #444;
+}
+
+#footer-area .site-info nav ul li {
+    border-bottom: none;
+}
+
+#footer-area .tab-content > .active {
+    border: none;
+}
+
+#footer-area .nav-tabs > li.active > a,
+#footer-area .nav-tabs > li.active > a:hover,
+#footer-area .nav-tabs > li.active > a:focus {
+    background-color: transparent;
+}
+
+#footer-area .tab-content .tab-entry {
+    font-size: inherit;
+}
+
+#footer-area .widgettitle {
+    font-size: 28px;
+    color: inherit;
+    margin-top: 0px;
+    text-align: center;
+}
+
+#footer-area #social ul li {
+    border-bottom: none;
+}
+
+#footer-area .widget ul li {
+    padding: 5px 0;
+    list-style: none;
+}
+
+#footer-area h3 {
+    font-family: 'Avenir LT Std 35 Light';
+    font-style: initial;
+    font-size: 22px;
+}
+
+#footer-area p {
+    font-size: 14px;
+}
+
+.footer-nav.nav > li {
+    position: relative;
+    display: inline-table;
+}
+
+.footer-nav.nav {
+    float: left;
+    margin-bottom: 2px;
+}
+
+.copyright {
+    color: #CCC;
+}
+
+.payment-logo {
+    text-align: right;
+}
+
+#colophon {
+    background-color: #888888;
+    padding: 10px 0;
+}
+
+.site-info a {
+    color: #777;
+}
+
+.site-info a:hover {
+    color: #999;
+}
+
+#footer-area a:hover {
+    color: #fff;
+}
+
+.site-info {
+    color: #999;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.footer-nav.nav > li > a:hover {
+    background-color: transparent;
+}
+
+.scroll-to-top {
+    background: #3B3B3B;
+    background: rgba(0, 0, 0, 0.4);
+    color: #FFF;
+    bottom: 4%;
+    cursor: pointer;
+    display: none;
+    position: fixed;
+    right: 20px;
+    z-index: 999;
+    font-size: 16px;
+    padding: 2px 10px;
+    border-radius: 4px;
+    -webkit-transition: background-color 0.1s linear;
+    -moz-transition: background-color 0.1s linear;
+    -o-transition: background-color 0.1s linear;
+    transition: background-color 0.1s linear;
+}
+
+.scroll-to-top:hover {
+    background: #1FA67A;
+    opacity: .8;
+}
+
+
+/* =Mobile Styling
+----------------------------------------------- */
+
+@media (max-width: 768px) {
+    .pull-right {
+        float: none !important;
+    }
+    .pull-left {
+        float: none !important;
+    }
+    .site-info,
+    .copyright {
+        text-align: center;
+    }
+    .footer-nav.nav,
+    .copyright {
+        float: none;
+    }
+    .flex-caption {
+        display: none;
+    }
+    .navbar > .container .navbar-brand {
+        margin: 0;
+    }
+    .navbar-default .navbar-nav > li > a {
+        line-height: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+
+/* =Social icons
+----------------------------------------------- */
+
+.top-bar {
+    border-bottom-color: #E8E8E8;
+}
+
+.social-icon {
+    font-size: 32px;
+    margin: 6px;
+    color: #E8E8E8;
+}
+
+#social {
+    top: 0;
+    position: relative;
+    text-align: center;
+}
+
+#social ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 0 10px;
+}
+
+#social ul {
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.fa-googleplus:before {
+    content: "\f0d5";
+}
+
+@media (max-width: 992px) {
+    .site-branding {
+        text-align: center;
+    }
+    #social {
+        top: 0;
+        float: none;
+        text-align: center;
+    }
+}
+
+
+/* =Call For Action
+----------------------------------------------- */
+
+.cfa {
+    padding: 30px 0px;
+    background: #1FA67A;
+    text-align: center;
+    overflow: hidden;
+}
+
+.cfa-text {
+    font-size: 22px;
+    color: #fff;
+    display: block;
+    padding-top: 10px;
+}
+
+.cfa-button {
+    background-color: transparent;
+    color: #fff;
+    padding: 15px 30px;
+    border-color: #fff;
+}
+
+.cfa-button a,
+.cfa-button a {
+    color: #fff;
+}
+
+.cfa-button:hover {
+    background-color: #fff;
+    color: #1FA67A;
+}
+
+.cfa-button:hover a {
+    color: #1FA67A;
+}
+
+
+/* =Custom Css
+----------------------------------------------- */
+
+
+/* 1. Secondary Menu */
+
+.secondary-navbar {
+    background-color: #543586;
+    color: white;
+}
+
+a.menu-nav {
+    font-size: 20px;
+}
+
+#menu-secondary-nav {
+    margin: 0px;
+    padding: 0px;
+    float: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 12px
+}
+
+#menu-secondary-nav form {
+    display: inline;
+    padding: 15px;
+    padding-right: 0px;
+}
+
+#menu-secondary-nav form > input[type="text"] {
+    border-radius: 15px;
+    padding-left: 15px;
+}
+
+#menu-secondary-nav li {
+    display: inline;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#menu-secondary-nav li>a {
+    padding: 15px;
+    padding-left: 5px;
+    color: white;
+}
+
+.fa-search {
+    margin-right: 10px;
+}
+
+
+/* 2. Navbar */
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    background-color: transparent;
+    color: #543586;
+}
+
+.menu-header-button a {
+    line-height: 34px !important;
+    padding-top: 30.5px !important;
+    padding-bottom: 30.5px !important;
+}
+
+.menu-header-button button {
+    background-color: #543586;
+    color: white;
+    border: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+}
+
+#logo {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.social-media {
+    float: left;
+    line-height: 48px;
+    padding-left: 15px;
+}
+
+.social-media a {
+    color: white;
+}
+
+.social-media i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+
+/* 3. Join the progam */
+
+.program {
+    text-align: center;
+    color: #000000;
+}
+
+.program .col-md-4 {
+    padding: 0px 30px;
+    margin-bottom: 30px;
+}
+
+.program h3 {
+    font-family: 'museo-slab', serif;
+    font-style: italic;
+    color: #000000;
+    font-size: 26px;
+}
+
+.program p {
+    margin-bottom: 30px;
+    font-size: 17px;
+}
+
+#button,a.button,
+.woocommerce div.product form.cart .button,
+.woocommerce #respond input#submit.alt,
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt {
+    background-color: #3f9c35 !important;
+    color: white !important;
+    font-family: 'Avenir LT Std 35 Light' !important;
+    font-weight: normal !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+}
+
+
+/* 4. Image slider */
+
+.carousel .item {
+    width: 100%;
+    /*slider width*/
+    height: 350px;
+    /*slider height*/
+    background-size: cover;
+}
+
+.carousel .carousel-control {
+    background: none;
+    border: none;
+    top: 50%;
+}
+
+#myCarousel h4 {
+    margin: 0;
+    text-align: center;
+    line-height: 350px;
+    font-size: 100px;
+}
+
+
+/* 5. Client Slider */
+
+.client-slider {
+    background-color: #7a5baa;
+    text-align: center;
+    color: white;
+    font-family: 'museo-slab', serif;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.client-slider img {
+    display: inline-block;
+}
+
+.client-slider h4 {
+    color: white;
+    font-style: italic;
+    margin-top: 20px;
+    font-size: 23px;
+    font-weight: 100;
+}
+
+.client-slider p {
+    font-weight: 100;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 22px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.client-slider h2 {
+    color: white;
+}
+
+
+/* 6. Header */
+
+.header-title {
+    background-color: #7a5baa;
+}
+
+
+/* 7. about us*/
+
+.about-us-list .col {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.about-us-list li:before {
+    content: "• ";
+    color: #3f9c35;
+    /* or whatever color you prefer */
+}
+
+.about-us-list li {
+    font-size: 15px;
+    padding: 10px 0 0 0;
+}
+
+.about-us-list h3 {
+    padding: 30px 0 0 0;
+}
+
+
+/* 8. program */
+
+#program-details tbody tr:nth-child(odd) {
+    background-color: #ebece8;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 12px;
+}
+
+#program-details tbody tr:nth-child(even) td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+#program-details p {
+    margin: 0px;
+}
+
+#pg-96-1 .panel-grid-cell {
+    border-right: 1px dotted black;
+}
+
+#pgc-96-1-3 {
+    border-right: 0px dotted black !important;
+}
+
+.success-stories p {
+    font-family: 'museo-slab', serif;
+    font-style: italic;
+}
+
+.success-stories h3 {
+    margin-top: 30px;
+    font-size: 22px;
+}
+
+.success-stories p {
+    font-weight: 100;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 22px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+/* 9. WooCommerce */
+
+#main>.products {
+    /*display: none;*/
+}
+
+.woocommerce-breadcrumb + .products {
+    display: none;
+}
+
+.woocommerce-breadcrumb {
+    margin-top: 20px !important;
+    font-size: 14px !important;
+}
+
+.woocommerce-breadcrumb a,
+.woocommerce-breadcrumb span {
+    margin-right: 0px !important;
+    font-family: 'Avenir LT Std 35 Light' !important;
+    line-height: 23px !important;
+    color: #553588 !important;
+}
+
+.woocommerce-breadcrumb #current {
+    font-family: 'Avenir LT Std 65 Medium' !important;
+    line-height: 23px !important;
+    color: #543586 !important;
+}
+
+.woocommerce-breadcrumb #seperator {
+    font-size: 18px;
+    font-weight: 100;
+    color: #ccc !important;
+    line-height: 23px !important;
+}
+
+.click_more_each_categories {
+    display: none;
+}
+
+#Qty {
+    display: inline;
+    font-size: 20px;
+    color: #543586;
+}
+
+.quantity {
+    display: inline;
+}
+
+.quantity input {
+    background-color: #f2f4f3;
+    border: 1px solid #CACDCC;
+    text-align: center;
+    padding-left: 10px;
+    font-size: 18px;
+}
+
+.woocommerce ul.products {
+    padding-top: 14px;
+    padding-bottom:0px;
+    margin-bottom: 0px;
+    /*background-color: #dfe0dc;*/
+    font-family: 'Avenir LT Std 35 Light';
+    font-style: initial;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
+    background-color: white;
+    box-shadow: 6px 6px 17px #888888;
+}
+
+.woocommerce ul.products form {
+    padding: 10px;
+    padding-top: 0px;
+}
+
+.woocommerce ul.products li.product a img {
+    height: 164px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.woocommerce ul.products li.product .button {
+     margin-top: 0.7em;
+    width: 100%;
+    background-color: transparent!important;
+    color: #543586 !important;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #543586;
+}
+
+.woocommerce ul.products li.product h3 {
+    min-height: 34px;
+    font-family: 'Avenir LT Std 35 Light';
+    font-style: initial;
+    font-size: 16px;
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
+    float: left;
+    margin: 0 2% 2% 0;
+    padding: 0;
+    position: relative;
+    width: 23.5%;
+}
+
+.woocommerce ul.products li.last,
+.woocommerce-page ul.products li.last {
+    margin-right: 0px;
+}
+
+.added_to_cart {
+    display: none !important;
+}
+
+.woocommerce div.product p.price,
+.woocommerce div.product span.price {
+    color: #543586;
+    display: block;
+    font-weight: 400;
+    margin-bottom: 0px;
+    font-size: 30px;
+    padding: 0px;
+}
+
+.woocommerce div.product p.price del,
+.woocommerce div.product span.price del {
+    display: inline;
+    font-size: 25px;
+}
+
+.woocommerce div.product p.price ins,
+.woocommerce div.product span.price ins {
+    background: 0 0;
+    font-weight: 700;
+    color: #ca2129;
+    text-decoration: none;
+}
+
+.woocommerce ul.products li.product .price {
+    color: #543586;
+    display: block;
+    font-weight: 400;
+    margin-bottom: 0px;
+    font-size: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.woocommerce ul.products li.product .price del {
+    display: inline;
+    font-size: 25px;
+}
+
+.woocommerce ul.products li.product .price ins {
+    background: 0 0;
+    font-weight: 700;
+    color: #ca2129;
+    text-decoration: none;
+}
+
+.woocommerce ul.products li.product .onsale {
+    position: relative;
+    border-radius: 0px;
+    width: 100%;
+    text-align: center;
+    background-color: #7a5baa;
+    color: white;
+    font-size: 21px;
+    margin: 0px !important;
+    margin-bottom: 5px !important;
+}
+
+.woocommerce span.onsale {
+    background-color: #ca2129;
+    font-size: 21px;
+}
+
+.moreinfo {
+    text-decoration: underline;
+    margin-bottom: 10px;
+padding-left: 11px;
+padding-right: 11px;
+}
+
+.moreinfo button {
+    width: 100%;
+    background-color: white;
+    color: #543586;
+    border: 1px solid #543586;
+    border-radius: 5px;
+    font-family: 'Avenir LT Std 35 Light';
+    font-size: 20px;
+    color: rgb(84, 53, 134);
+    font-weight: bold;
+    padding: 3px 0 2px;
+}
+
+.term-description {
+    padding: 0px;
+    border-left: 0px solid black;
+    margin: 0px;
+    line-height: 21px;
+    margin-bottom: 5px;
+}
+
+.product_title {
+    color: #553588;
+}
+
+.woocommerce #content div.product div.images,
+.woocommerce div.product div.images,
+.woocommerce-page #content div.product div.images,
+.woocommerce-page div.product div.images {
+    width: 28%;
+}
+
+.woocommerce #content div.product div.summary,
+.woocommerce div.product div.summary,
+.woocommerce-page #content div.product div.summary,
+.woocommerce-page div.product div.summary {
+    width: 68%;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals table {
+    width: 100%;
+    text-align: right;
+}
+
+.cart_totals h2 {
+    text-align: right;
+}
+
+
+/* 10. Range  Slider */
+
+.range-slider {
+    background-color: #dfe0dc;
+    text-align: center;
+    color: white;
+    font-family: 'museo-slab', serif;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.range-slider h2 {
+    margin-bottom: 10px;
+}
+
+.testimonial {
+    margin-bottom: 20px;
+}
+
+.range-slider .slick-slide {
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.range-slider img {
+    display: inline-block;
+    height: 164px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.range-slider label {
+    width: 100%;
+    text-transform: uppercase;
+    font-family: 'Avenir LT Std 35 Light' !important;
+    background-color: #7a5baa;
+    padding-top: 3px;
+    padding-bottom: 0px;
+    font-size: 20px;
+    margin-bottom: 0px;
+    line-height: 28px;
+}
+
+.range-slider label>a {
+    color: white;
+}
+
+.range-slider h4 {
+    color: white;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+.range-slider .moreinfo {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 0px;
+}
+
+.range-slider .onsale {
+    position: relative;
+    border-radius: 0px;
+    width: 100%;
+    text-align: center;
+    background-color: #ca2129;
+    color: white;
+    font-size: 15px;
+    margin: 0px !important;
+    margin-bottom: 10px !important;
+    text-transform: initial;
+    line-height: 24px;
+}
+
+.slick-dots {
+    display: none !important;
+}
+
+.gform_wrapper {
+    margin: 0px !important;
+    max-width: 100% !important;
+}
+
+.gform_wrapper .hidden_label input.large,
+.gform_wrapper .hidden_label select.large,
+.gform_wrapper .top_label input.large,
+.gform_wrapper .top_label select.large {
+    width: 100% !important;
+}
+
+.gform_wrapper textarea.medium {
+    width: 100% !important;
+}
+
+.featured_cat_product {
+    text-align: center;
+    height: auto;
+    margin-left: 0px;
+    margin-right: 0px;
+    box-shadow: 6px 6px 17px #888888;
+    padding: 0px;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.featured_cat_product .col-md-12:first-child {
+    padding: 0px;
+}
+
+.featured_cat_product label {
+    background-color: #7a5baa;
+    width: 100%;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 23px;
+    font-weight: initial;
+}
+
+.featured_cat_product img {
+    height: 200px;
+    width: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.featured_cat_product span {
+    font-size: 15px;
+}
+
+.featured_cat_product a {
+    font-size: 15px;
+    background-color: #3f9c35;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.cat_nav {
+    color: white;
+    float: right;
+    padding: 44px 0px;
+}
+
+.cat_nav a {
+    color: white;
+    margin: 8px;
+    font-size: 16px;
+}
+
+td {
+    padding: 5px !important;
+}
+
+#tab-description h3 {
+    font-style: initial;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+#tab-description thead td {
+    border-bottom: 10px solid black;
+    font-size: 20px;
+    text-align: center;
+}
+
+.woocommerce .related ul li.product,
+.woocommerce .related ul.products li.product,
+.woocommerce .upsells.products ul li.product,
+.woocommerce .upsells.products ul.products li.product,
+.woocommerce-page .related ul li.product,
+.woocommerce-page .related ul.products li.product,
+.woocommerce-page .upsells.products ul li.product,
+.woocommerce-page .upsells.products ul.products li.product {
+    width: 22.05%;
+}
+
+.woocommerce .related ul li.product img,
+.woocommerce .related ul.products li.product img,
+.woocommerce .upsells.products ul li.product img,
+.woocommerce .upsells.products ul.products li.product img,
+.woocommerce-page .related ul li.product img,
+.woocommerce-page .related ul.products li.product img,
+.woocommerce-page .upsells.products ul li.product img,
+.woocommerce-page .upsells.products ul.products li.product img {
+    height: 164px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+.woocommerce div.product form.cart,
+.woocommerce div.product p.cart {
+    padding: 10px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    margin-top: 30px;
+}
+
+/* Use this selector to override the line style on a given series */
+
+.ct-series-a .ct-line,
+.ct-series-a .ct-point {
+    /* Set the colour of this series line */
+    stroke: #1FA67A;
+}
+
+.BMI_table {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    line-height: 40px;
+}
+
+.BMI_table td {
+    border-right: 1px dotted black;
+    width: 25%;
+}
+
+.BMI_table td:nth-child(4) {
+    border-right: 0px dotted black;
+}
+
+.BMI_table thead {
+    font-weight: bold;
+}
+
+.BMI_table tr:nth-child(even),
+.BMI_table thead tr {
+    background-color: #ebece8;
+}
+
+.BMI_table h3 {
+    margin: 0px;
+}
+
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}
+
+
+/* Recipes */
+
+.recipes .cc-child-pages-thumb {
+    width: 100%;
+}
+
+.dropdown-menu > .active > a,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a {
+    background-color: #7a5baa;
+}
+
+.dropdown-menu > .active > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover {
+    background-color: #3f9c35;
+}
+
+.entry-content ul {
+    padding-left: 30px !important;
+}
+
+.entry-content li {
+    list-style: initial !important;
+}
+
+.entry-content h4 {
+    color: #3f9c35;
+    margin-top: 30px;
+}
+
+
+.widget ul{
+	padding-left: 10px !important;
+}
+
+.gform_body ul {
+    padding: 0px !important;
+}
+
+.faq ul {
+    padding: 0px !important;
+}
+
+.faq li {
+    list-style: none !important;
+}
+
+.gform_wrapper select,
+.gform_wrapper textarea {
+    background-color: rgb(224, 224, 224);
+}
+
+.gform_wrapper input[type=email],
+.gform_wrapper input[type=number],
+.gform_wrapper input[type=password],
+.gform_wrapper input[type=tel],
+.gform_wrapper input[type=text],
+.gform_wrapper input[type=url] {
+    background-color: rgb(224, 224, 224);
+}
+
+#input_3_13_1_container {
+    display: block;
+}
+
+#input_3_13_2_container {
+    margin-left: 0px !important;
+}
+
+.cart-tab {
+    top: 20em;
+}
+.cart-tab.right a.cart-parent{
+    width: 76px;
+    left:-76px;
+    text-align: center;
+    padding:15px;
+}
+
+.active-tab{
+    right: 0em !important;
+}
+
+
+#cart-button{
+        width: 76px;
+    left: -76px;
+    text-align: center;
+    padding: 15px;
+    position: absolute;
+    background-color: white;
+        box-shadow: -10px 3px 1em 0 rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: -10px 3px 1em 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -10px 3px 1em 0 rgba(0, 0, 0, 0.2);
+    -o-box-shadow: -10px 3px 1em 0 rgba(0, 0, 0, 0.2);
+}
+
+.empty{
+    padding-bottom: 0px !important;
+}
+
+p.buttons {
+    margin-bottom: 0px !important;
+}
+
+#input_3_7_3_container, #input_3_7_6_container{
+	width: 20% !important;
+}
+
+#pg-105-0, #pg-105-2, #pl-105 .panel-grid-cell .so-panel{
+	
+	margin-bottom: 0px !important;
+}
+
+#panel-105-3-1-0{
+	padding-top:20px;
+	padding-bottom: 20px;
+}
+
+/* Responsive */
+
+@media (min-width: 768px) {
+    #logo a {
+        line-height: 100px;
+    }
+    .navbar-default .navbar-nav > li > a {
+        line-height: 64px;
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+    .range-slider .site-content {
+        width: 67%;
+        max-width: 1170px;
+    }
+	.page-id-575 .widget_black-studio-tinymce > div{
+		min-height: 748px;
 	}
-    return $value;
-}
-add_filter( 'site_transient_update_plugins', 'filter_plugin_updates' );
-
-
-
-// Gravity Forms Custom Addresses (Australia)
-add_filter('gform_address_types', 'australian_address', 10, 2);
-/**
- * Add Australia address format to Gravity form address field
- * @param  [type] $address_types [description]
- * @param  [type] $form_id       [description]
- * @return [type]                [description]
- */
-function australian_address( $address_types, $form_id ) {
-    $address_types['australia'] = array(
-    'label'       =>   'Australia', //labels the dropdown
-    'country'     =>   'Australia', //sets Australia as default country
-    'zip_label'   =>   'Post Code', //what it says
-    'state_label' =>   'State', //as above
-    'states' => array( 
-        '', 
-        'Australian Capital Territory',
-        'New South Wales',
-        'Northern Territory',
-        'Queensland',
-        'South Australia',
-        'Tasmania', 'Victoria',
-        'Western Australia'
-        )
-    );
-    return $address_types;
 }
 
-add_filter('wwp_filter_wholesale_price_title_text', 'override_wholesale_text', 10, 1);
- 
-function override_wholesale_text($wholesaletext) {
-    return 'Pharmacies Price:';
+@media (max-width: 768px) {
+    #logo {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .navbar {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    #pg-96-1 .panel-grid-cell {
+        border-right: 0px dotted black;
+        border-bottom: 1px dotted black;
+    }
+    #pgc-96-1-3 {
+        border-bottom: 0px dotted black !important;
+    }
+    /*table {
+        width: 100%;
+    }
+    thead {
+        display: none;
+    }
+    tbody td {
+        display: block;
+        text-align: center;
+    }
+    tbody td:before {
+        content: attr(data-th);
+        display: block;
+        text-align: center;
+    }*/
+    #tab-description td {
+        padding: 5px !important;
+    }
+    #tab-description table {
+        width: 100%;
+    }
+    .woocommerce ul.products li.product,
+    .woocommerce-page ul.products li.product {
+        width: 100%;
+        float: left;
+        clear: both;
+        margin: 0 0 2.992em;
+    }
+    .entry-title {
+        font-size: 30px;
+    }
+    .cat_nav {
+        padding-top: 20px;
+    }
+    .woocommerce .related ul li.product,
+    .woocommerce .related ul.products li.product,
+    .woocommerce .upsells.products ul li.product,
+    .woocommerce .upsells.products ul.products li.product,
+    .woocommerce-page .related ul li.product,
+    .woocommerce-page .related ul.products li.product,
+    .woocommerce-page .upsells.products ul li.product,
+    .woocommerce-page .upsells.products ul.products li.product {
+        width: 100%;
+    }
+    .social-media {
+        width: 100%;
+        float: initial;
+        padding-left: 0px;
+        text-align: center;
+    }
+    #menu-secondary-nav{
+        text-align: center;
+        width: 100%;
+    }
 }
-
-
-function user_chart (){
-  global $wpdb;
-  $user_id = get_current_user_id();
-  $key1 = 'initial_height';
-  $key2 = 'initial_weight';
-  $key3 = 'initial_waist';
-  $key4 = 'initial_bmi';
-
-
-
-  $single = true;
-  $initial_height = get_user_meta( $user_id, $key1, $single ); 
-  $initial_weight = get_user_meta( $user_id, $key2, $single ); 
-  $initial_waist = get_user_meta( $user_id, $key3, $single ); 
-  $initial_bmi = get_user_meta( $user_id, $key4, $single );
-  $intial_date = date("Y-m-d", strtotime(get_userdata(get_current_user_id( ))->user_registered));
-
-
-  $initial_object =(object) array(
-    "date" =>  $intial_date,
-    "weight" => $initial_weight,
-    "waist" => $initial_waist,
-    "BMI" => $initial_bmi
-    );
-
-  $myrows = $wpdb->get_results( "SELECT date, weight, waist, BMI FROM km_user_health_history WHERE user_ID='$user_id'" );
-  array_unshift($myrows,$initial_object);
-
-  usort($myrows, function($a, $b) {
-    return $a->date- $b->date;
-  });
-
-  $date_array = array();
-  $weight_array = array();
-  $waist_array = array();
-  $bmi_array = array();
-
-  foreach ($myrows as $obj){
-    array_push($date_array, $obj->date);
-    array_push($weight_array, $obj->weight);
-    array_push($waist_array, $obj->waist);
-    array_push($bmi_array, $obj->BMI);
-  }
-
- 
-  echo '<h2>History</h2>';
-  echo '<div class="row">';
-
-  echo '<div class="col-md-4" style="text-align: center">';
-  echo '<h3>BMI</h3>';
-  echo '<div class="ct-chart-bmi ct-perfect-fourth"></div>';
-  echo '</div>';
-
-  echo '<div class="col-md-4" style="text-align: center">';
-  echo '<h3>Weight</h3>';
-  echo '<div class="ct-chart-weight ct-perfect-fourth"></div>';
-  echo '</div>';
-
-  echo '<div class="col-md-4" style="text-align: center">';
-  echo '<h3>Waist</h3>';
-  echo '<div class="ct-chart-waist ct-perfect-fourth"></div>';
-  echo '</div>';
-
-  echo '</div>';
-  echo "<script type='text/javascript'>
-
-  new Chartist.Line('.ct-chart-bmi', {
-  labels:".json_encode($date_array).",
-  series:[ ".str_replace('"','',json_encode($bmi_array))."]
-}, {
-  fullWidth: true
-});
-
-</script>";
-
-echo "<script type='text/javascript'>
-
-  new Chartist.Line('.ct-chart-weight', {
-  labels:".json_encode($date_array).",
-  series:[ ".str_replace('"','',json_encode($weight_array))."]
-}, {
-  fullWidth: true
-
-});
-
-</script>";
-
-echo "<script type='text/javascript'>
-
-  new Chartist.Line('.ct-chart-waist', {
-  labels:".json_encode($date_array).",
-  series:[ ".str_replace('"','',json_encode($waist_array))."]
-}, {
-  fullWidth: true
-});
-
-</script>";
-
-echo'<table class="BMI_table">';
-	echo '<thead><tr><td><h3>Date</h3></td><td><h3>BMI</h3></td><td><h3>Waist</h3></td><td><h3>Weight</h3></td></tr></thead>';
-	foreach($myrows as $obj){
-		echo '<tr>';
-		echo '<td>'.$obj->date.'</td>';
-		echo '<td>'.$obj->BMI.'</td>';
-		echo '<td>'.$obj->waist.'</td>';
-		echo '<td>'.$obj->weight.'</td>';
-
-		echo '</tr>';
-	}
-
-	echo '</table>';
-
-  };
- 
-add_shortcode( 'user_chart', 'user_chart' );
-
-add_action('gform_after_submission_4', 'entry_into_db', 10, 2);
-function entry_into_db($entry, $form) {
- 
-    // uncomment to see the entry object 
-    // echo '<pre>';
-    // var_dump($entry);
-    // echo '</pre>';
- 
-   
-  
- 
-    global $wpdb;
-
-    $user_id = get_current_user_id();
-    $key = 'initial_height';
-    $input_height = get_user_meta( $user_id, $key, true ); 
-    $input_height_in_m =  $input_height/100;
-    $input_date = rgar( $entry, '2' );
-    $input_weight = rgar( $entry, '3' );
-    $input_waist = rgar( $entry, '4' );
-    $input_bmi= round($input_weight / pow("$input_height_in_m",2),2);
-
-    // add form data to custom database table
-  $wpdb->insert(
-      'km_user_health_history',
-      array(
-        'user_id' => $user_id,
-        'date' => $input_date,
-        'weight' => $input_weight,
-        'waist' => $input_waist,
-        'height' => $input_bmi,
-        'BMI' => $input_bmi
-      )
-  );
- 
-}
-remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-remove_action( 'wp_print_styles', 'print_emoji_styles' );
-
-/*register_activation_hook( __FILE__, 'endo_create_custom_table' );
-
-function endo_create_custom_table() {
-
-  global $wpdb;
-
-  $table_name = $wpdb->prefix . "user_health_history";
-
-  $sql = "CREATE TABLE $table_name(
-    id mediumint(9) NOT NULL AUTO_INCREMENT,
-    user_id VARCHAR(60) NOT NULL,
-    date datetime,
-    weight VARCHAR(60) NOT NULL,
-    waist VARCHAR(60) NOT NULL,
-    height VARCHAR(60) NOT NULL,
-    BMI VARCHAR(60) NOT NULL,
-    UNIQUE KEY id(id)
-    ) COLLATE utf8_general_ci;";
-
-  require_once(ABSPATH . '/wp-admin/includes/upgrade.php');
-  
-  dbDelta($sql);
-
-}*/
