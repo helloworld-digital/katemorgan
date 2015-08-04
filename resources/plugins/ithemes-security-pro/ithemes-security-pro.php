@@ -3,9 +3,9 @@
 	Plugin Name: iThemes Security Pro
 	Plugin URI: https://ithemes.com/security
 	Description: Protect your WordPress site by hiding vital areas of your site, protecting access to important files, preventing brute-force login attempts, detecting attack attempts and more.
-	Version: 1.16.1
+	Version: 1.17.0
 	Text Domain: it-l10n-ithemes-security-pro
-	Domain Path: /languages
+	Domain Path: /lang
 	Author: iThemes.com
 	Author URI: https://ithemes.com
 	Network: True

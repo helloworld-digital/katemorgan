@@ -86,13 +86,6 @@ class ITSEC_Password_Admin {
 
 		//Add Settings sections
 		add_settings_section(
-			'password-enabled',
-			__( 'Enable WordPress Password Enforcement', 'it-l10n-ithemes-security-pro' ),
-			'__return_empty_string',
-			'security_page_toplevel_page_itsec_pro'
-		);
-
-		add_settings_section(
 			'password-settings',
 			__( 'WordPress Password Settings', 'it-l10n-ithemes-security-pro' ),
 			'__return_empty_string',
@@ -121,37 +114,31 @@ class ITSEC_Password_Admin {
 		);
 
 		//Add Settings Fields
-		add_settings_field(
-			'itsec_password[enabled]',
-			__( 'Enable WordPress Password Enforcement', 'it-l10n-ithemes-security-pro' ),
-			array( $this, 'settings_field_enabled' ),
-			'security_page_toplevel_page_itsec_pro',
-			'password-enabled'
-		);
+		if ( ! defined( 'WP_FEATURE_BETTER_PASSWORDS' ) ) {
+			add_settings_field(
+				'itsec_password[generate]',
+				__( 'Add Strong Password Generation to User Profile Page', 'it-l10n-ithemes-security-pro' ),
+				array( $this, 'settings_field_generate' ),
+				'security_page_toplevel_page_itsec_pro',
+				'password-settings'
+			);
 
-		add_settings_field(
-			'itsec_password[generate]',
-			__( 'Add Strong Password Generation to User Profile Page', 'it-l10n-ithemes-security-pro' ),
-			array( $this, 'settings_field_generate' ),
-			'security_page_toplevel_page_itsec_pro',
-			'password-settings'
-		);
+			add_settings_field(
+				'itsec_password[generate_role]',
+				__( 'Select Roles Allowed to Generate Strong Passwords', 'it-l10n-ithemes-security-pro' ),
+				array( $this, 'settings_field_generate_role' ),
+				'security_page_toplevel_page_itsec_pro',
+				'password-settings-2'
+			);
 
-		add_settings_field(
-			'itsec_password[generate_role]',
-			__( 'Select Roles Allowed to Generate Strong Passwords', 'it-l10n-ithemes-security-pro' ),
-			array( $this, 'settings_field_generate_role' ),
-			'security_page_toplevel_page_itsec_pro',
-			'password-settings-2'
-		);
-
-		add_settings_field(
-			'itsec_password[generate_length]',
-			__( 'Base Length of Generated Password', 'it-l10n-ithemes-security-pro' ),
-			array( $this, 'settings_field_generate_length' ),
-			'security_page_toplevel_page_itsec_pro',
-			'password-settings-2'
-		);
+			add_settings_field(
+				'itsec_password[generate_length]',
+				__( 'Base Length of Generated Password', 'it-l10n-ithemes-security-pro' ),
+				array( $this, 'settings_field_generate_length' ),
+				'security_page_toplevel_page_itsec_pro',
+				'password-settings-2'
+			);
+		}
 
 		add_settings_field(
 			'itsec_password[expire]',
@@ -246,7 +233,6 @@ class ITSEC_Password_Admin {
 		echo __( 'Use the options below to strengthen the passwords users use to log in to your site. You can enforce password expiration, add a strong passwords generator to user profiles and more.', 'it-l10n-ithemes-security-pro' );
 		echo '</p>';
 
-		$this->core->do_settings_section( 'security_page_toplevel_page_itsec_pro', 'password-enabled', false );
 		$this->core->do_settings_section( 'security_page_toplevel_page_itsec_pro', 'password-settings', false );
 		$this->core->do_settings_section( 'security_page_toplevel_page_itsec_pro', 'password-settings-2', false );
 		$this->core->do_settings_section( 'security_page_toplevel_page_itsec_pro', 'password-settings-3', false );
@@ -275,7 +261,6 @@ class ITSEC_Password_Admin {
 
 		global $itsec_globals;
 
-		$input['enabled']         = ( isset( $input['enabled'] ) && intval( $input['enabled'] == 1 ) ? true : false );
 		$input['generate']        = ( isset( $input['generate'] ) && intval( $input['generate'] == 1 ) ? true : false );
 		$input['expire']          = ( isset( $input['expire'] ) && intval( $input['expire'] == 1 ) ? true : false );
 		$input['expire_max']      = isset( $input['expire_max'] ) ? absint( $input['expire_max'] ) : 120;
@@ -315,26 +300,6 @@ class ITSEC_Password_Admin {
 		}
 
 		return $input;
-
-	}
-
-	/**
-	 * echos Enable WordPress Password Enabled Field
-	 *
-	 * @since 1.8
-	 *
-	 * @return void
-	 */
-	public function settings_field_enabled() {
-
-		if ( isset( $this->settings['enabled'] ) && $this->settings['enabled'] === true ) {
-			$enabled = 1;
-		} else {
-			$enabled = 0;
-		}
-
-		echo '<input type="checkbox" id="itsec_password_enabled" name="itsec_password[enabled]" value="1" ' . checked( 1, $enabled, false ) . '/>';
-		echo '<label for="itsec_password_enabled"> ' . __( 'Enable WordPress Password Enforcement', 'it-l10n-ithemes-security-pro' ) . '</label>';
 
 	}
 
@@ -395,7 +360,7 @@ class ITSEC_Password_Admin {
 	}
 
 	/**
-	 * echos Enable WordPress Password Enabled Field
+	 * Displays Role selection for Password Expire settings
 	 *
 	 * @since 1.8
 	 *
@@ -464,7 +429,7 @@ class ITSEC_Password_Admin {
 	}
 
 	/**
-	 * echos Enable WordPress Password Enabled Field
+	 * Displays Role selection for Generate Password settings
 	 *
 	 * @since 1.8
 	 *

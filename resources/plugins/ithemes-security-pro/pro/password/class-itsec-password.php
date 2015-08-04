@@ -29,7 +29,7 @@ class ITSEC_Password {
 	 */
 	public function admin_enqueue_scripts() {
 
-		if ( isset( get_current_screen()->id ) && ( get_current_screen()->id === 'profile' || get_current_screen()->id === 'user' ) ) { //this should only run on profile pages
+		if ( isset( get_current_screen()->id ) && in_array( get_current_screen()->id, array( 'profile', 'profile-network', 'user' ), true ) ) { //this should only run on profile pages
 
 			$this->generate_script();
 
@@ -46,7 +46,7 @@ class ITSEC_Password {
 	 */
 	public function admin_init() {
 
-		if ( isset( get_current_screen()->id ) && get_current_screen()->id !== 'profile' ) {
+		if ( isset( get_current_screen()->id ) && ( 'profile' === get_current_screen()->id || 'profile-network' === get_current_screen()->id ) ) {
 
 			if ( isset( $this->settings['expire'] ) && $this->settings['expire'] === true ) { //make sure we're enforcing a password change
 
@@ -72,6 +72,10 @@ class ITSEC_Password {
 	}
 
 	private function generate_script() {
+
+		if ( defined( 'WP_FEATURE_BETTER_PASSWORDS' ) ) {
+			return;
+		}
 
 		global $itsec_globals;
 

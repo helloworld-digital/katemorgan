@@ -122,3 +122,7 @@
 	Enhancement: Improved error messages when export file creation fails.
 1.14.0 - 2015-07-02 - Chris Jean
 	Feature Removal: Removed the malware scanning and malware wp-cli integration featres as VirusTotal no longer supports scanning from WordPress sites. A replacement is in the works.
+1.15.0 - 2015-08-03 - Chris Jean
+	Enhancement: Improved the reCaptcha feature's integration into comments. It now supports more themes than ever before and bypasses captcha validation for logged in users.
+	Enhancement: Added support for WordPress 4.3's updated password user interface and password generator.
+	Bug Fix: Fixed some issues with profile pages on multisite setups that affected both two factor authentication and the password generator.

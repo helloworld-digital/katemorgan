@@ -5,7 +5,16 @@ class ITSEC_Recaptcha {
 	private
 		$settings;
 
-	function run() {
+	public function run() {
+		// Run setup on plugins_loaded so that we can use is_user_logged_in()
+		add_action( 'plugins_loaded', array( $this, 'setup' ) );
+	}
+
+	public function setup() {
+		// Logged in users are people, we don't need to re-verify
+		if ( is_user_logged_in() ) {
+			return;
+		}
 
 		$this->settings = get_site_option( 'itsec_recaptcha' );
 
@@ -16,7 +25,11 @@ class ITSEC_Recaptcha {
 
 		if ( isset( $this->settings['comments'] ) && true === $this->settings['comments'] ) {
 
-			add_filter( 'comment_form_defaults', array( $this, 'comment_form_defaults' ) );
+			if ( version_compare( $GLOBALS['wp_version'], '4.2', '>=' ) ) {
+				add_filter( 'comment_form_submit_button', array( $this, 'comment_form_submit_button' ) );
+			} else {
+				add_filter( 'comment_form_field_comment', array( $this, 'comment_form_field_comment' ) );
+			}
 			add_filter( 'preprocess_comment', array( $this, 'preprocess_comment' ) );
 
 		}
@@ -40,17 +53,34 @@ class ITSEC_Recaptcha {
 	/**
 	 * Add recaptcha form to comment form
 	 *
-	 * @since 1.13
+	 * @since 1.17
 	 *
-	 * @param array $defaults The default comment form arguments.
+	 * @param string  $comment_field The comment field in the comment form
 	 *
-	 * @return array  The default comment form arguments.
+	 * @return string The comment field with our recaptcha field appended
 	 */
-	public function comment_form_defaults( $defaults ) {
+	public function comment_form_field_comment( $comment_field ) {
 
-		$defaults['comment_notes_after'] = $this->show_field( false );
+		$comment_field .= $this->show_field( false );
 
-		return $defaults;
+		return $comment_field;
+
+	}
+
+	/**
+	 * Preferred method to add recaptcha form to comment form. Used in WP 4.2+
+	 *
+	 * @since 1.17
+	 *
+	 * @param string  $submit_button The submit button in the comment form
+	 *
+	 * @return string The submit button with our recaptcha field prepended
+	 */
+	public function comment_form_submit_button( $submit_button ) {
+
+		$submit_button = $this->show_field( false ) . $submit_button;
+
+		return $submit_button;
 
 	}
 

@@ -72,7 +72,7 @@ class ITSEC_Two_Factor {
 
 		global $itsec_globals;
 
-		if ( isset( get_current_screen()->id ) && 'profile' === get_current_screen()->id ) {
+		if ( isset( get_current_screen()->id ) && ( 'profile' === get_current_screen()->id || 'profile-network' === get_current_screen()->id ) ) {
 
 			wp_enqueue_script( 'jquery-ui-dialog' );
 			wp_enqueue_style( 'wp-jquery-ui-dialog' );
