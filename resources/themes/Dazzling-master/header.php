@@ -34,8 +34,7 @@
 			<a href="https://twitter.com/KateMorganWL"><i class="fa fa-twitter"></i></a>
 			<a href="https://www.youtube.com/channel/UCnETdMUJ_mTgu6AKbyePR4w"><i class="fa fa-youtube-play"></i></a>
 			<a href="https://www.pinterest.com/katem0335/"><i class="fa fa-pinterest"></i></a>
-			<a href="#"><i class="fa fa-instagram"></i></a>
-			<a href=""><i class="fa fa-mobile"></i>Download App</a>
+
 			</div>
 			<?php dazzling_secondary_header_menu(); ?>
 

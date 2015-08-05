@@ -145,11 +145,15 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					$visibility		= 'visible';
 				}
 
+				if (!is_woocommerce()){
+					$hide_cart = " style='display:none;' ";
+				}
+
 					if ( ! is_cart() && ! is_checkout() ) {
 						if ( $widget == 'yes' ) {
-							echo '<div class="' . esc_attr( $position ) . ' cart-tab ' . esc_attr( $skin ) . ' ' . esc_attr( $visibility ) . ' active-tab">';
+							echo '<div class="' . esc_attr( $position ) . ' cart-tab ' . esc_attr( $skin ) . ' ' . esc_attr( $visibility ) . ' active-tab" '.$hide_cart.'>';
 						} else {
-							echo '<div class="' . esc_attr( $position ) . ' cart-tab no-animation ' . esc_attr( $skin ) . ' ' . esc_attr( $visibility ) . ' active-tab">';
+							echo '<div class="' . esc_attr( $position ) . ' cart-tab no-animation ' . esc_attr( $skin ) . ' ' . esc_attr( $visibility ) . ' active-tab"'.$hide_cart.'>';
 						}
 							wcct_cart_button();
 							// Display the widget if specified

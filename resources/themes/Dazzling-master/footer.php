@@ -21,7 +21,7 @@
 				<div class="copyright col-md-8">
 
 					<?php echo of_get_option( 'custom_footer_text', 'dazzling' ); ?>
-					 <a style="margin-left: 20px" href="<?php echo get_home_url(); ?>/">Terms of use</a> | <a href="<?php echo get_home_url(); ?>/privacy-policy">Privacy Policy</a>
+					 <a style="margin-left: 20px" href="<?php echo get_home_url(); ?>/terms-of-use">Terms of use</a> | <a href="<?php echo get_home_url(); ?>/privacy-policy">Privacy Policy</a>
            | <a href="<?php echo get_home_url(); ?>/delivery-details">Delivery Details</a>
            | <a href="<?php echo get_home_url(); ?>/refund-policy">Refund Policy</a>
 					<!--Custome theme footer info-->

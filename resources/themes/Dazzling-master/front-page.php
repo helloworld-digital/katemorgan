@@ -21,7 +21,18 @@ get_header(); ?>
           $active=''; 
         } ?>
         <div class="<?php echo $active; ?> item" style='background-image: url(<?php the_sub_field('slide_image'); ?>); background-position: top center;'>
-        <h4><?php the_sub_field('slide_text'); $x++; ?></h4>
+	<div class="container" style="width: 67%;">
+	<div class="row">
+	<div class="col-md-6">
+        <p style="height: 350px;display: table-cell;vertical-align: middle;font-size: 40px;text-align: center;color: white;line-height: 50px;"><?php the_sub_field('slide_text'); $x++; ?></p>
+	</div>
+<div class="col-md-6" style="text-align: right;">
+<?php if (get_sub_field('offer_image')){ ?>
+<img style="margin-top: 30px;box-shadow: 6px 6px 17px #888888;" src="<?php the_sub_field('offer_image'); ?>" />
+<?php } ?>
+</div>
+	</div>
+	</div>
         </div>
       <?php endwhile; ?>
       </div>
@@ -73,7 +84,7 @@ foreach ($all_categories as $cat) {
         $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
         $image = wp_get_attachment_url( $thumbnail_id );
         if ( $image ) {
-          echo '<br/><img src="' . $image . '" alt="" />';
+          echo '<br/><div class="wrapper"><img src="' . $image . '" alt="" /></div>';
         }
 
         echo "<div class='moreinfo'><a href='shop/#products_categories_row_".$cat->term_id."'><button>Shop Now <i class='fa fa-shopping-cart'></i></button></a></div>";
@@ -93,7 +104,7 @@ foreach ($all_categories as $cat) {
 
     <?php $x =1 ; while ( have_rows('join_the_program') ) : the_row();?>
       <div id="program-<?php echo $x;?>" class="col-sm-4 col-md-4">
-        <img src="<?php echo get_home_url();?>/resources/themes/Dazzling-master/images/program<?php echo $x;?>.png"/>
+        <a href="<?php the_sub_field('link'); ?>"><img src="<?php echo get_home_url();?>/resources/themes/Dazzling-master/images/program<?php echo $x;?>.png"/></a>
         <h3><?php the_sub_field('title'); ?></h3>
         <p><?php the_sub_field('description'); ?></p>
         <a id="button" href="<?php the_sub_field('link'); ?>">Learn more</a>
