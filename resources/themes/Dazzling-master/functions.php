@@ -695,7 +695,7 @@ function pharmacies_check_shortcode( $atts, $content = null ) {
     		$user_roles = $current_user->roles;
     		$user_role = array_shift($user_roles);
 	
-		if($user_role[0]=="Wholesale Customer"){
+		if($user_role=="wholesale_customer"){
 			return $content;
 		}
 		else{
@@ -714,7 +714,7 @@ function customer_check_shortcode( $atts, $content = null ) {
     		$user_roles = $current_user->roles;
     		$user_role = array_shift($user_roles);
 	
-		if($user_role[0]!="Wholesale Customer"){
+		if($user_role!="wholesale_customer"){
 			return $content;
 		}
 		else{

@@ -499,6 +499,7 @@ table h3 {
     color: white;
     font-weight: normal;
 	margin-top: 10px;
+    line-height: 64px;
 }
 
 .entry-title a {

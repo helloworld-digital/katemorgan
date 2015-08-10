@@ -117,7 +117,7 @@ class WWP_Wholesale_Prices {
 
                 // Crush out existing prices, regular and sale
                 if ( strpos( $price , 'ins') !== false ) {
-                    $wholesalePriceHTML = str_replace( 'ins' , 'del' , $price );
+                    //$wholesalePriceHTML = str_replace( 'ins' , 'del' , $price );
                 } else {
                     $wholesalePriceHTML = str_replace( '<span' , '<del><span' , $price );
                     $wholesalePriceHTML = str_replace( '</span>' , '</span></del>' , $wholesalePriceHTML );
@@ -127,7 +127,7 @@ class WWP_Wholesale_Prices {
                 $wholesalePriceTitleText = apply_filters( 'wwp_filter_wholesale_price_title_text' , $wholesalePriceTitleText );
 
                 $wholesalePriceHTML .= '<span style="display: block;" class="wholesale_price_container">
-                                            <span class="wholesale_price_title">' . $wholesalePriceTitleText . '</span>
+                                            <!--<span class="wholesale_price_title">' . $wholesalePriceTitleText . '</span>-->
                                             <ins>' . $wholesalePrice . '</ins>
                                         </span>';
 

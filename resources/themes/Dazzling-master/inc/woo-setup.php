@@ -67,13 +67,31 @@ function dazzling_wrapper_start() {
 	echo '<div id="primary" class="content-area col-sm-12 col-md-12">';
 	echo '<h1 class="entry-title" style="display: inline-block">';
 	
+	global $current_user;
+
+    $user_roles = $current_user->roles;
+    $user_role = array_shift($user_roles);
+
 	if(is_product()){
 	the_title();
+		if($user_role=="wholesale_customer"){
+			echo " ".get_post_meta( get_the_ID(), 'pharmacies_slug', true );
+		}
+	}
+	else if(is_shop()){
+	
+		if($user_role=="wholesale_customer"){
+			echo "Pharmacy ";
+		}
+		woocommerce_page_title();
 	}
 	else{
 		woocommerce_page_title();
 	}
-	echo '<img src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping2.png" style="margin-left: 40px;height: 64px;"/> </h1>';
+	if($user_role!="wholesale_customer"){
+		echo '<img src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping2.png" style="margin-left: 40px;height: 63px;"/>';
+	}
+	echo  '</h1>';
 	if(is_shop()){
 	$taxonomy     = 'product_cat';
 	$orderby      = 'name';  

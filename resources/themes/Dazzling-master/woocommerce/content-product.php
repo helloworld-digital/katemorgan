@@ -42,6 +42,22 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 	$classes[] = 'last';
 }
 ?>
+
+<?php
+global $current_user;
+
+		    $user_roles = $current_user->roles;
+		    $user_role = array_shift($user_roles);
+			if($user_role=="wholesale_customer"){ 
+				if(get_post_meta( get_the_ID(), 'wholesale_customer_have_wholesale_price', true )!= yes){
+					return;
+				}
+			} 
+?>
+
+
+
+
 <li <?php post_class( $classes ); ?>>
 
 	<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
@@ -58,7 +74,18 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 			do_action( 'woocommerce_before_shop_loop_item_title' );
 		?>
 		<div class="moreinfo" style="text-align: center; padding: 0px;">More info</div>
-		<h3><?php the_title(); ?></h3>
+		<h3>
+		<?php
+			the_title();
+			global $current_user;
+
+		    $user_roles = $current_user->roles;
+		    $user_role = array_shift($user_roles);
+			if($user_role=="wholesale_customer"){ 
+				echo " ".get_post_meta( get_the_ID(), 'pharmacies_slug', true );
+			} 
+		?>
+		</h3>
 		
 		<?php
 			/**
@@ -84,3 +111,5 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 	?>
 	
 </li>
+
+
