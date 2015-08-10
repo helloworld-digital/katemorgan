@@ -685,3 +685,40 @@ function endo_create_custom_table() {
 
 }*/
 
+add_shortcode( 'pharmacies', 'pharmacies_check_shortcode' );
+
+function pharmacies_check_shortcode( $atts, $content = null ) {
+
+		
+		global $current_user;
+
+    		$user_roles = $current_user->roles;
+    		$user_role = array_shift($user_roles);
+	
+		if($user_role[0]=="Wholesale Customer"){
+			return $content;
+		}
+		else{
+			return '';
+		}
+
+}
+
+add_shortcode( 'customer', 'customer_check_shortcode' );
+
+function customer_check_shortcode( $atts, $content = null ) {
+
+		
+		global $current_user;
+
+    		$user_roles = $current_user->roles;
+    		$user_role = array_shift($user_roles);
+	
+		if($user_role[0]!="Wholesale Customer"){
+			return $content;
+		}
+		else{
+			return '';
+		}
+
+}
