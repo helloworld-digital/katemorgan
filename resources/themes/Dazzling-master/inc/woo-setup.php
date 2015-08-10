@@ -73,7 +73,7 @@ function dazzling_wrapper_start() {
 	else{
 		woocommerce_page_title();
 	}
-	echo '</h1>';
+	echo '<img src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping2.png" style="margin-left: 40px;height: 64px;"/> </h1>';
 	if(is_shop()){
 	$taxonomy     = 'product_cat';
 	$orderby      = 'name';  

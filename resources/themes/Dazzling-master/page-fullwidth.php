@@ -9,10 +9,13 @@
 
 get_header(); ?>
 
-<div class="header-title">
+<div class="header-title" style="padding-top: 10px; padding-bottom: 10px;">
 	<div class="container">
-		<div id="primary" class="content-area col-sm-12 col-md-12">
+		<div id="primary" class="content-area col-sm-6 col-md-6">
 			<h1 class="entry-title"><?php the_title(); ?></h1>
+		</div>
+		<div id="primary" class="content-area col-sm-6 col-md-6">
+			<h3>The Kate Morgan Weight Loss Program</h3>
 		</div>
 	</div>
 </div>

@@ -554,7 +554,7 @@ function user_chart (){
   echo '<div class="row">';
 
   echo '<div class="col-md-4" style="text-align: center">';
-  echo '<h3>BMI</h3>';
+  echo '<h3>Body Measurement</h3>';
   echo '<div class="ct-chart-bmi ct-perfect-fourth"></div>';
   echo '</div>';
 

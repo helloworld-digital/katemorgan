@@ -1,0 +1,204 @@
+"Order ID","Post ID","Order Total","Order Subtotal","Order Currency","Order Discount","Coupon Code","Coupon Description","Order Total Tax","Order Subtotal Excl. Tax","Sales Tax Total","Shipping Tax Total","Order Tax Percentage","Payment Gateway ID","Payment Gateway","Shipping Method ID","Shipping Method","Shipping Cost","Shipping Weight","Order Status","Post Status","Order Key","Order Date","Order Time","Customer Message","Customer Note","Order Notes","Total Quantity","Total Order Items","User ID","Username","User Role","Checkout IP Address","Checkout Browser Agent","Has Downloads","Has Downloaded","Billing: Full Name","Billing: First Name","Billing: Last Name","Billing: Company","Billing: Street Address (Full)","Billing: Street Address 1","Billing: Street Address 2","Billing: City","Billing: ZIP Code","Billing: State (prefix)","Billing: State","Billing: Country (prefix)","Billing: Country","Billing: Phone Number","Billing: E-mail Address","Shipping: Full Name","Shipping: First Name","Shipping: Last Name","Shipping: Company","Shipping: Street Address (Full)","Shipping: Street Address 1","Shipping: Street Address 2","Shipping: City","Shipping: ZIP Code","Shipping: State (prefix)","Shipping: State","Shipping: Country (prefix)","Shipping: Country","Order Item #1: Product ID","Order Item #1: Variation ID","Order Item #1: SKU","Order Item #1: Product Name","Order Item #1: Product Variation","Order Item #1: Product Description","Order Item #1: Product Excerpt","Order Item #1: Tax Class","Order Item #1: Quantity","Order Item #1: Total","Order Item #1: Subtotal","Order Item #1: RRP","Order Item #1: Stock","Order Item #1: Tax","Order Item #1: Tax Subtotal","Order Item #1: Type","Order Item #1: Category","Order Item #1: Tag","Order Item #1: Total Sales","Order Item #1: Weight","Order Item #1: Total Weight","Order Item #2: Product ID","Order Item #2: Variation ID","Order Item #2: SKU","Order Item #2: Product Name","Order Item #2: Product Variation","Order Item #2: Product Description","Order Item #2: Product Excerpt","Order Item #2: Tax Class","Order Item #2: Quantity","Order Item #2: Total","Order Item #2: Subtotal","Order Item #2: RRP","Order Item #2: Stock","Order Item #2: Tax","Order Item #2: Tax Subtotal","Order Item #2: Type","Order Item #2: Category","Order Item #2: Tag","Order Item #2: Total Sales","Order Item #2: Weight","Order Item #2: Total Weight","Order Item #3: Product ID","Order Item #3: Variation ID","Order Item #3: SKU","Order Item #3: Product Name","Order Item #3: Product Variation","Order Item #3: Product Description","Order Item #3: Product Excerpt","Order Item #3: Tax Class","Order Item #3: Quantity","Order Item #3: Total","Order Item #3: Subtotal","Order Item #3: RRP","Order Item #3: Stock","Order Item #3: Tax","Order Item #3: Tax Subtotal","Order Item #3: Type","Order Item #3: Category","Order Item #3: Tag","Order Item #3: Total Sales","Order Item #3: Weight","Order Item #3: Total Weight","Order Item #4: Product ID","Order Item #4: Variation ID","Order Item #4: SKU","Order Item #4: Product Name","Order Item #4: Product Variation","Order Item #4: Product Description","Order Item #4: Product Excerpt","Order Item #4: Tax Class","Order Item #4: Quantity","Order Item #4: Total","Order Item #4: Subtotal","Order Item #4: RRP","Order Item #4: Stock","Order Item #4: Tax","Order Item #4: Tax Subtotal","Order Item #4: Type","Order Item #4: Category","Order Item #4: Tag","Order Item #4: Total Sales","Order Item #4: Weight","Order Item #4: Total Weight","Order Item #5: Product ID","Order Item #5: Variation ID","Order Item #5: SKU","Order Item #5: Product Name","Order Item #5: Product Variation","Order Item #5: Product Description","Order Item #5: Product Excerpt","Order Item #5: Tax Class","Order Item #5: Quantity","Order Item #5: Total","Order Item #5: Subtotal","Order Item #5: RRP","Order Item #5: Stock","Order Item #5: Tax","Order Item #5: Tax Subtotal","Order Item #5: Type","Order Item #5: Category","Order Item #5: Tag","Order Item #5: Total Sales","Order Item #5: Weight","Order Item #5: Total Weight","Order Item #6: Product ID","Order Item #6: Variation ID","Order Item #6: SKU","Order Item #6: Product Name","Order Item #6: Product Variation","Order Item #6: Product Description","Order Item #6: Product Excerpt","Order Item #6: Tax Class","Order Item #6: Quantity","Order Item #6: Total","Order Item #6: Subtotal","Order Item #6: RRP","Order Item #6: Stock","Order Item #6: Tax","Order Item #6: Tax Subtotal","Order Item #6: Type","Order Item #6: Category","Order Item #6: Tag","Order Item #6: Total Sales","Order Item #6: Weight","Order Item #6: Total Weight","Order Item #7: Product ID","Order Item #7: Variation ID","Order Item #7: SKU","Order Item #7: Product Name","Order Item #7: Product Variation","Order Item #7: Product Description","Order Item #7: Product Excerpt","Order Item #7: Tax Class","Order Item #7: Quantity","Order Item #7: Total","Order Item #7: Subtotal","Order Item #7: RRP","Order Item #7: Stock","Order Item #7: Tax","Order Item #7: Tax Subtotal","Order Item #7: Type","Order Item #7: Category","Order Item #7: Tag","Order Item #7: Total Sales","Order Item #7: Weight","Order Item #7: Total Weight","Order Item #8: Product ID","Order Item #8: Variation ID","Order Item #8: SKU","Order Item #8: Product Name","Order Item #8: Product Variation","Order Item #8: Product Description","Order Item #8: Product Excerpt","Order Item #8: Tax Class","Order Item #8: Quantity","Order Item #8: Total","Order Item #8: Subtotal","Order Item #8: RRP","Order Item #8: Stock","Order Item #8: Tax","Order Item #8: Tax Subtotal","Order Item #8: Type","Order Item #8: Category","Order Item #8: Tag","Order Item #8: Total Sales","Order Item #8: Weight","Order Item #8: Total Weight","Order Item #9: Product ID","Order Item #9: Variation ID","Order Item #9: SKU","Order Item #9: Product Name","Order Item #9: Product Variation","Order Item #9: Product Description","Order Item #9: Product Excerpt","Order Item #9: Tax Class","Order Item #9: Quantity","Order Item #9: Total","Order Item #9: Subtotal","Order Item #9: RRP","Order Item #9: Stock","Order Item #9: Tax","Order Item #9: Tax Subtotal","Order Item #9: Type","Order Item #9: Category","Order Item #9: Tag","Order Item #9: Total Sales","Order Item #9: Weight","Order Item #9: Total Weight","Order Item #10: Product ID","Order Item #10: Variation ID","Order Item #10: SKU","Order Item #10: Product Name","Order Item #10: Product Variation","Order Item #10: Product Description","Order Item #10: Product Excerpt","Order Item #10: Tax Class","Order Item #10: Quantity","Order Item #10: Total","Order Item #10: Subtotal","Order Item #10: RRP","Order Item #10: Stock","Order Item #10: Tax","Order Item #10: Tax Subtotal","Order Item #10: Type","Order Item #10: Category","Order Item #10: Tag","Order Item #10: Total Sales","Order Item #10: Weight","Order Item #10: Total Weight"
+"345","345","2.60","2.60","AUD","0.00","","","0","2.60","0.00","0.00","","eway_payments","Credit card","free_shipping","Free Shipping","0.00","","Completed","wc-completed","wc_order_559f4e29c88b7","10/07/2015","14:46:36","","","10/07/2015 14:46:34: Order status changed from Pending Payment to Processing.
+10/07/2015 14:46:36: Order item stock reduced successfully.
+10/07/2015 14:47:36: Order status changed from Processing to Completed.","1","1","1","xmarketing","Administrator","203.214.69.156","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.132 Safari/537.36","No","No","XIAN YANG WONG","XIAN YANG","WONG","","16/28 Jeffcott Street","16/28 Jeffcott Street","","West Melbourne","3003","VIC","Victoria","AU","Australia","0424960655","yang@xmarketing.com.au","XIAN YANG WONG","XIAN YANG","WONG","","16/28 Jeffcott Street","16/28 Jeffcott Street","","West Melbourne","3003","VIC","Victoria","AU","Australia","254","0","","Pine Lime Meal Replacement Shake 52g","","<h3 class=""p1"">Directions for use:</h3>
+<ul>
+	<li class=""p1"">Add 200 – 250 mL of cold water to a Shaker.<span class=""Apple-converted-space"">  </span>Add the contents of a Kate Morgan Sachet and shake until the contents of the sachet are fully dissolved.<span class=""Apple-converted-space"">  </span>Add more or less water to suit your taste.</li>
+	<li class=""p1"">Simply replace two meals a day with Kate Morgan Meal Replacement Shakes, Bars, European Cremes or Soups.<span class=""Apple-converted-space"">  </span>Enjoy one healthy meal and 1 snack per day.</li>
+</ul>
+<h3 class=""p1"">Ingredients:</h3>
+<p class=""p1"">Milk Solids, Fructose, Maltodextrin, thickeners (407, 1442, 415), vegetable oil, glucose syrup solids, flavour, Minerals (Magnesium Oxide, Ferrous Sulphate, Zinc Sulphate, Potassium Iodine), Vitamins (C, E, Niacin, A, D, B6, B1, B2, B12, Folate), emulsifiers (471, soy lecithin), colours (102, 133).</p>
+<p class=""p1"">Contains Ingredients Derived From Milk, Wheat & Soy.</p>
+
+<h3 class=""p1"">Nutritional Information:</h3>
+<table border=""1"" width=""50%"" cellpadding=""10px"">
+<thead>
+<tr>
+<td colspan=""5"" width=""347"">
+
+
+
+<strong>NUTRITION INFORMATION</strong>
+
+<strong>Serving size:   52g</strong></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td width=""135""><strong> </strong></td>
+<td width=""53""><strong>Average Quantity per Serving</strong></td>
+<td width=""53""><strong> </strong></td>
+<td width=""53""><strong>Average Quantity per 100g</strong></td>
+<td width=""53""><strong> </strong></td>
+</tr>
+<tr>
+<td width=""135""><strong>ENERGY</strong></td>
+<td width=""53"">874</td>
+<td width=""53"">kJ</td>
+<td width=""53"">1680</td>
+<td width=""53"">kJ</td>
+</tr>
+<tr>
+<td width=""135""><strong>PROTEIN</strong></td>
+<td width=""53"">17</td>
+<td width=""53"">g</td>
+<td width=""53"">32.7</td>
+<td width=""53"">g</td>
+</tr>
+<tr>
+<td width=""135""><strong>FAT, TOTAL</strong></td>
+<td width=""53"">2.1</td>
+<td width=""53"">g</td>
+<td width=""53"">4</td>
+<td width=""53"">g</td>
+</tr>
+<tr>
+<td width=""135""><strong>- SATURATED</strong></td>
+<td width=""53"">0.8</td>
+<td width=""53"">g</td>
+<td width=""53"">1.6</td>
+<td width=""53"">g</td>
+</tr>
+<tr>
+<td width=""135""><strong>CARBOHYDRATE</strong></td>
+<td width=""53"">29.6</td>
+<td width=""53"">g</td>
+<td width=""53"">57</td>
+<td width=""53"">g</td>
+</tr>
+<tr>
+<td width=""135""><strong>- SUGARS</strong></td>
+<td width=""53"">24.5</td>
+<td width=""53"">g</td>
+<td width=""53"">47.1</td>
+<td width=""53"">g</td>
+</tr>
+<tr>
+<td width=""135""><strong>SODIUM</strong></td>
+<td width=""53"">185</td>
+<td width=""53"">mg</td>
+<td width=""53"">356</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>POTASSIUM</strong></td>
+<td width=""53"">460</td>
+<td width=""53"">mg</td>
+<td width=""53"">883</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Vitamin A</strong></td>
+<td width=""53"">189</td>
+<td width=""53"">μg</td>
+<td width=""53"">364</td>
+<td width=""53"">μg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Thiamin</strong></td>
+<td width=""53"">0.3</td>
+<td width=""53"">mg</td>
+<td width=""53"">0.5</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Riboflavin</strong></td>
+<td width=""53"">0.6</td>
+<td width=""53"">mg</td>
+<td width=""53"">1.2</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Niacin</strong></td>
+<td width=""53"">2.6</td>
+<td width=""53"">mg</td>
+<td width=""53"">4.9</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Folate</strong></td>
+<td width=""53"">52</td>
+<td width=""53"">μg</td>
+<td width=""53"">100</td>
+<td width=""53"">μg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Vitamin B6</strong></td>
+<td width=""53"">0.5</td>
+<td width=""53"">mg</td>
+<td width=""53"">0.9</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Vitamin B12</strong></td>
+<td width=""53"">1</td>
+<td width=""53"">μg</td>
+<td width=""53"">1.9</td>
+<td width=""53"">μg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Vitamin C</strong></td>
+<td width=""53"">10.2</td>
+<td width=""53"">mg</td>
+<td width=""53"">20</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Vitamin D</strong></td>
+<td width=""53"">2.5</td>
+<td width=""53"">μg</td>
+<td width=""53"">4.9</td>
+<td width=""53"">μg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Vitamin E</strong></td>
+<td width=""53"">2.5</td>
+<td width=""53"">mg</td>
+<td width=""53"">4.9</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Calcium</strong></td>
+<td width=""53"">400</td>
+<td width=""53"">mg</td>
+<td width=""53"">770</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Iron</strong></td>
+<td width=""53"">3.1</td>
+<td width=""53"">mg</td>
+<td width=""53"">6</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Iodine</strong></td>
+<td width=""53"">37.7</td>
+<td width=""53"">μg</td>
+<td width=""53"">73</td>
+<td width=""53"">μg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Magnesium</strong></td>
+<td width=""53"">81.6</td>
+<td width=""53"">mg</td>
+<td width=""53"">157</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Phosphorous</strong></td>
+<td width=""53"">300</td>
+<td width=""53"">mg</td>
+<td width=""53"">578</td>
+<td width=""53"">mg</td>
+</tr>
+<tr>
+<td width=""135""><strong>Zinc</strong></td>
+<td width=""53"">3</td>
+<td width=""53"">mg</td>
+<td width=""53"">5.8</td>
+<td width=""53"">mg</td>
+</tr>
+</tbody>
+</table>
+&nbsp;","Kate Morgan Meal Replacement Shake sachets are heavily fortified with all of the vitamins and minerals that your body needs to stay healthy while you lose weight. <span class=""Apple-converted-space"">  </span>They are part of a nutritionally balanced weight loss program and taste great, keeping you fuller for longer.<span class=""Apple-converted-space"">  </span>Contents of one sachet replaces one meal.","Standard","1","2.60","2.60","2.60","","0.00","0.00","Product","Shakes","","1","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
