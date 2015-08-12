@@ -2350,6 +2350,7 @@ p.buttons {
 
 .textwidget ul li{
         list-style: initial !important;
+	margin-left: 10px;
 }
 
 .ccpage_linked_title{
@@ -2463,4 +2464,18 @@ p.buttons {
         text-align: center;
         width: 100%;
     }
+}
+
+
+@media print {
+	nav, .secondary-navbar, .header-title, #breadcrumbs, #footer-area, img{
+		display: none;
+	}
+	table{
+		width: 100% !important;
+	}
+
+	h2{
+		color: #553588;
+	}	
 }
