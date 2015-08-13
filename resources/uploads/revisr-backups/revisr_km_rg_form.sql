@@ -19,12 +19,12 @@ CREATE TABLE `km_rg_form` (
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `is_trash` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `km_rg_form` WRITE;
 /*!40000 ALTER TABLE `km_rg_form` DISABLE KEYS */;
-INSERT INTO `km_rg_form` VALUES (1,'Contact','2015-06-24 06:14:48',1,0),(2,'Sign Up','2015-07-08 07:50:06',1,0),(3,'Registration','2015-07-08 23:58:04',1,0),(4,'User Input','2015-07-09 04:10:05',1,0),(5,'User Profile','2015-07-10 04:19:01',1,0),(6,'Newsletter Popup','2015-07-20 01:43:01',1,0),(7,'Login','2015-08-04 05:17:26',1,1),(8,'BMI Calculator','2015-08-06 05:40:37',1,0);
+INSERT INTO `km_rg_form` VALUES (1,'Contact','2015-06-24 06:14:48',1,0),(2,'Sign Up','2015-07-08 07:50:06',1,0),(3,'Registration','2015-07-08 23:58:04',1,0),(4,'User Input','2015-07-09 04:10:05',1,0),(5,'User Profile','2015-07-10 04:19:01',1,0),(6,'Newsletter Popup','2015-07-20 01:43:01',1,0),(7,'Login','2015-08-04 05:17:26',1,1),(8,'BMI Calculator','2015-08-06 05:40:37',1,0),(9,'Constant Contact','2015-08-13 03:13:56',1,0);
 /*!40000 ALTER TABLE `km_rg_form` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
