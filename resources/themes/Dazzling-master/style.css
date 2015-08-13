@@ -2367,6 +2367,10 @@ p.buttons {
 	display: none;
 }
 
+.fa-file-pdf-o:before {
+	color: red;
+}
+
 /* Responsive */
 
 @media (min-width: 768px) {

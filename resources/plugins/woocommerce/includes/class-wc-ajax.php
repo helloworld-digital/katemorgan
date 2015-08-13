@@ -32,14 +32,13 @@ class WC_AJAX {
 	 * @return string
 	 */
 	public static function get_endpoint( $request = '' ) {
-		return esc_url_raw( add_query_arg( 'wc-ajax', $request ) );
+		return esc_url_raw( add_query_arg( 'wc-ajax', $request, remove_query_arg( array( 'remove_item', 'add-to-cart', 'added-to-cart' ) ) ) );
 	}
 
 	/**
 	 * Set AJAX defines.
 	 */
 	public static function define_ajax() {
-
 		if ( ! empty( $_GET['wc-ajax'] ) ) {
 			if ( ! defined( 'DOING_AJAX' ) ) {
 				define( 'DOING_AJAX', true );
@@ -47,6 +46,8 @@ class WC_AJAX {
 			if ( ! defined( 'WC_DOING_AJAX' ) ) {
 				define( 'WC_DOING_AJAX', true );
 			}
+			// Turn off display_errors during AJAX events to prevent malformed JSON
+			@ini_set( 'display_errors', 0 );
 		}
 	}
 
@@ -439,7 +440,7 @@ class WC_AJAX {
 			die();
 		}
 
-		$variation_id = $variable_product->get_matching_variation( $_POST );
+		$variation_id = $variable_product->get_matching_variation( stripslashes_deep( $_POST ) );
 
 		if ( $variation_id ) {
 			$variation = $variable_product->get_available_variation( $variation_id );
@@ -2670,7 +2671,7 @@ class WC_AJAX {
 	 */
 	private static function variation_bulk_action_variable_regular_price( $variations, $data ) {
 		if ( empty( $data['value'] ) ) {
-			break;
+			return;
 		}
 
 		foreach ( $variations as $variation_id ) {
@@ -2696,7 +2697,7 @@ class WC_AJAX {
 	 */
 	private static function variation_bulk_action_variable_sale_price( $variations, $data ) {
 		if ( empty( $data['value'] ) ) {
-			break;
+			return;
 		}
 
 		foreach ( $variations as $variation_id ) {
@@ -2722,7 +2723,7 @@ class WC_AJAX {
 	 */
 	private static function variation_bulk_action_variable_stock( $variations, $data ) {
 		if ( empty( $data['value'] ) ) {
-			break;
+			return;
 		}
 
 		$value = wc_clean( $data['value'] );
@@ -2820,7 +2821,7 @@ class WC_AJAX {
 	 */
 	private static function variation_bulk_action_variable_sale_schedule( $variations, $data ) {
 		if ( ! isset( $data['date_from'] ) && ! isset( $data['date_to'] ) ) {
-			break;
+			return;
 		}
 
 		foreach ( $variations as $variation_id ) {

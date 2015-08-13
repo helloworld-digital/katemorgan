@@ -89,7 +89,7 @@ function dazzling_wrapper_start() {
 		woocommerce_page_title();
 	}
 	if($user_role!="wholesale_customer"){
-		echo '<img src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping2.png" style="margin-left: 40px;height: 63px;"/>';
+		echo '<img src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping2.png" />';
 	}
 	echo  '</h1>';
 	if(is_shop()){
