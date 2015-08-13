@@ -726,7 +726,7 @@ function customer_check_shortcode( $atts, $content = null ) {
 add_action('after_setup_theme', 'remove_admin_bar');
 
 function remove_admin_bar() {
-if (!current_user_can('administrator') && !is_admin()) {
+if (!current_user_can('administrator') && !current_user_can('editor') && !current_user_can('shop_manager') && !is_admin()) {
   show_admin_bar(false);
 }
 }

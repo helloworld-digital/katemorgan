@@ -1612,6 +1612,16 @@ a.button,
 }
 
 
+.client-slider .slick-prev, .client-slider .slick-next{
+	top: 25%;
+	width: 30px;
+	height: 30px;
+}
+
+.client-slider .slick-prev:before, .client-slider .slick-next:before{
+	font-size: 30px;
+}
+
 /* 6. Header */
 
 .header-title {
