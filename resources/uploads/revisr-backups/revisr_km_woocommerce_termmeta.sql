@@ -20,7 +20,7 @@ CREATE TABLE `km_woocommerce_termmeta` (
   PRIMARY KEY (`meta_id`),
   KEY `woocommerce_term_id` (`woocommerce_term_id`),
   KEY `meta_key` (`meta_key`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `km_woocommerce_termmeta` WRITE;
