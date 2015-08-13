@@ -22,12 +22,12 @@ CREATE TABLE `km_rg_lead_meta` (
   KEY `lead_id` (`lead_id`),
   KEY `meta_key` (`meta_key`(191)),
   KEY `form_id_meta_key` (`form_id`,`meta_key`(191))
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `km_rg_lead_meta` WRITE;
 /*!40000 ALTER TABLE `km_rg_lead_meta` DISABLE KEYS */;
-INSERT INTO `km_rg_lead_meta` VALUES (1,3,1,'user_registration_feed_id','2'),(2,3,2,'user_registration_feed_id','2');
+INSERT INTO `km_rg_lead_meta` VALUES (1,3,1,'user_registration_feed_id','2'),(2,3,2,'user_registration_feed_id','2'),(3,3,53,'user_registration_feed_id','2'),(4,3,54,'user_registration_feed_id','2'),(5,3,57,'user_registration_feed_id','2'),(6,3,58,'user_registration_feed_id','2'),(7,3,59,'user_registration_feed_id','2'),(8,3,63,'user_registration_feed_id','2'),(9,3,67,'user_registration_feed_id','2');
 /*!40000 ALTER TABLE `km_rg_lead_meta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -28,7 +28,7 @@ CREATE TABLE `km_wplc_chat_sessions` (
 
 LOCK TABLES `km_wplc_chat_sessions` WRITE;
 /*!40000 ALTER TABLE `km_wplc_chat_sessions` DISABLE KEYS */;
-INSERT INTO `km_wplc_chat_sessions` VALUES (1,'2015-05-13 05:53:26','xmarketing','yang@xmarketing.com.au','a:2:{s:2:\"ip\";s:14:\"203.214.69.156\";s:10:\"user_agent\";s:121:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.152 Safari/537.36\";}',8,'1431496569013','http://dev.xmarketing.com.au/katemorgan/','2015-05-13 05:56:54');
+INSERT INTO `km_wplc_chat_sessions` VALUES (1,'2015-05-13 05:53:26','xmarketing','yang@xmarketing.com.au','a:2:{s:2:\"ip\";s:14:\"203.214.69.156\";s:10:\"user_agent\";s:121:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.152 Safari/537.36\";}',8,'1431496569013','http://174.121.78.227/~kmxmarketing/','2015-05-13 05:56:54');
 /*!40000 ALTER TABLE `km_wplc_chat_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

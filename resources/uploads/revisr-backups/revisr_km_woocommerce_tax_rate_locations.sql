@@ -20,7 +20,7 @@ CREATE TABLE `km_woocommerce_tax_rate_locations` (
   PRIMARY KEY (`location_id`),
   KEY `tax_rate_id` (`tax_rate_id`),
   KEY `location_type` (`location_type`),
-  KEY `location_type_code` (`location_type`,`location_code`)
+  KEY `location_type_code` (`location_type`,`location_code`(90))
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

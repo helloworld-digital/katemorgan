@@ -14,24 +14,24 @@ DROP TABLE IF EXISTS `km_users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `km_users` (
   `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_login` varchar(60) NOT NULL DEFAULT '',
-  `user_pass` varchar(64) NOT NULL DEFAULT '',
-  `user_nicename` varchar(50) NOT NULL DEFAULT '',
-  `user_email` varchar(100) NOT NULL DEFAULT '',
-  `user_url` varchar(100) NOT NULL DEFAULT '',
+  `user_login` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_pass` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_nicename` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `user_url` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `user_registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `user_activation_key` varchar(60) NOT NULL DEFAULT '',
+  `user_activation_key` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `user_status` int(11) NOT NULL DEFAULT '0',
-  `display_name` varchar(250) NOT NULL DEFAULT '',
+  `display_name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`ID`),
   KEY `user_login_key` (`user_login`),
   KEY `user_nicename` (`user_nicename`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `km_users` WRITE;
 /*!40000 ALTER TABLE `km_users` DISABLE KEYS */;
-INSERT INTO `km_users` VALUES (1,'xmarketing','$P$BxU9vh5Oongazf9.w62nrL8uUEWPHA0','xian-yang-wong','yang@xmarketing.com.au','','2015-04-13 04:48:34','',0,'xmarketing'),(2,'katemorgan','$P$BFWGC6WWHTI6VMSJce95CQJ28qsK9c0','kate-morgan','yang2@xmarketing.com.au','','2015-07-01 23:45:12','',0,'Kate Morgan'),(4,'xianyangwong','$P$BNTtVQB6Md0P9C1XPwZwh3ZTsil6SM.','xianyangwong_stockist','xianyangwong@gmail.com','','2015-07-09 00:35:10','',0,'xianyangwong'),(5,'edwright','$P$BkEuGpiKEU2M3QMBDv6iShg5fXeNJG0','edwright','ed@xmarketing.com.au','','2015-07-09 01:04:08','',0,'edwright');
+INSERT INTO `km_users` VALUES (1,'xmarketing','$P$BxU9vh5Oongazf9.w62nrL8uUEWPHA0','xian-yang-wong','yang@xmarketing.com.au','','2015-04-13 04:48:34','',0,'xmarketing'),(2,'katemorgan','$P$BFWGC6WWHTI6VMSJce95CQJ28qsK9c0','kate-morgan','yang2@xmarketing.com.au','','2015-07-01 23:45:12','',0,'Kate Morgan'),(4,'xianyangwong','$P$BNTtVQB6Md0P9C1XPwZwh3ZTsil6SM.','xianyangwong_stockist','xianyangwong@gmail.com','','2015-07-09 00:35:10','',0,'xianyangwong'),(6,'petrog','$P$BBf5E9Ti4zhQI9a9Y7SJ9FXAGQLrmQ1','petrog','pfrogers@bigpond.net.au','','2015-07-24 04:41:43','',0,'petrog'),(8,'lisa','$P$BWQBIysXsS5oRo3KeGn/0Q8fDppMfk0','lisa','lisa@katemorgan.com.au','','2015-07-27 02:13:21','',0,'lisa'),(11,'Peter Rogers','$P$BWZFFKlT8zumL/AAo2jvEQEinWqcJb.','peter-rogers','progers@katemorgan.com.au','','2015-08-02 04:15:30','',0,'Peter Rogers'),(12,'pharmacy_test','$P$BgtQGyJZHOl4qgZU5zLWTgV742fJ080','pharmacy-test-account-x-marketing','yang3@xmarketing.com.au','','2015-08-04 00:22:07','',0,'Pharmacy Test Account X Marketing'),(13,'lisamorgan','$P$BtOooU6CpJKR70om3aaXFB1zHD0mZt0','lisamorgan','admin@katemorgan.com.au','','2015-08-12 04:41:05','',0,'lisamorgan');
 /*!40000 ALTER TABLE `km_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

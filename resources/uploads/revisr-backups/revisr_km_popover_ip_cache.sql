@@ -9,24 +9,21 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-DROP TABLE IF EXISTS `km_terms`;
+DROP TABLE IF EXISTS `km_popover_ip_cache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `km_terms` (
-  `term_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `slug` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `term_group` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`term_id`),
-  KEY `slug` (`slug`(191)),
-  KEY `name` (`name`(191))
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `km_popover_ip_cache` (
+  `IP` varchar(12) NOT NULL DEFAULT '',
+  `country` varchar(2) DEFAULT NULL,
+  `cached` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`IP`),
+  KEY `cached` (`cached`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `km_terms` WRITE;
-/*!40000 ALTER TABLE `km_terms` DISABLE KEYS */;
-INSERT INTO `km_terms` VALUES (1,'Uncategorized','uncategorized',0),(2,'simple','simple',0),(3,'grouped','grouped',0),(4,'variable','variable',0),(5,'external','external',0),(6,'Shakes','shakes',0),(7,'Cremes','european-style-cremes',0),(15,'Packs','packs',0),(9,'Soup','soups',0),(10,'Bar','meal-replacement-bar',0),(12,'Nav','nav',0),(13,'Secondary Nav','secondary-nav',0),(14,'Footer','footer',0),(17,'Essentials','essentials',0);
-/*!40000 ALTER TABLE `km_terms` ENABLE KEYS */;
+LOCK TABLES `km_popover_ip_cache` WRITE;
+/*!40000 ALTER TABLE `km_popover_ip_cache` DISABLE KEYS */;
+/*!40000 ALTER TABLE `km_popover_ip_cache` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
