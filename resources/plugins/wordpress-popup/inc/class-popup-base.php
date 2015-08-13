@@ -635,7 +635,7 @@ abstract class IncPopupBase {
 			$this
 		);
 
-		foreach ( $popup_ids as $id ) {
+		foreach ( (array)$popup_ids as $id ) {
 			$popup = IncPopupDatabase::get( $id );
 
 			if ( $popup_id ) {
