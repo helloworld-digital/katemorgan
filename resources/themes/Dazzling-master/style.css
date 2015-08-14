@@ -469,6 +469,7 @@ table h3 {
 }
 
 
+
 /* =Post styling
 ----------------------------------------------- */
 
@@ -495,11 +496,11 @@ table h3 {
 }
 
 .entry-title {
-    font-size: 40px;
+    font-size: 28px;
     color: white;
     font-weight: normal;
-	margin-top: 10px;
-    line-height: 64px;
+	margin: 0px;
+    line-height: 60px;
 }
 
 .entry-title a {
@@ -1629,9 +1630,11 @@ a.button,
 }
 
 .header-title h3 {
-    color: white;
-text-align: right;
+        color: white;
+    text-align: right;
     font-weight: 200;
+    margin: 0px;
+    line-height: 60px;
 }
 
 
@@ -1841,6 +1844,7 @@ text-align: right;
     margin-bottom: 0px;
     font-size: 30px;
     padding: 0px;
+    line-height:30px;
 }
 
 .woocommerce div.product p.price del,
@@ -2106,8 +2110,7 @@ display: block;
 
 .cat_nav {
     color: white;
-    float: right;
-    padding: 28px 0px;
+    line-height: 60px;
 }
 
 .cat_nav a {
@@ -2398,6 +2401,9 @@ p.buttons {
     }
     .page-id-575 .widget_black-studio-tinymce > div {
         min-height: 748px;
+    }
+    .cat_nav{
+        float: right;
     }
 }
 

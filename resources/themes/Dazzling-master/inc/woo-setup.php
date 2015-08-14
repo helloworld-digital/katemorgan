@@ -62,9 +62,10 @@ add_action('woocommerce_before_main_content', 'dazzling_wrapper_start', 10);
 add_action('woocommerce_after_main_content', 'dazzling_wrapper_end', 10);
 
 function dazzling_wrapper_start() {
-	echo '<div class="header-title" >';
+	echo '<div class="header-title" style="padding-top: 10px; padding-bottom: 10px;">';
 	echo '<div class="container">';
-	echo '<div id="primary" class="content-area col-sm-12 col-md-12">';
+
+	echo '<div id="primary" class="content-area col-sm-12 col-md-6">';
 	echo '<h1 class="entry-title" style="display: inline-block">';
 	
 	global $current_user;
@@ -88,10 +89,18 @@ function dazzling_wrapper_start() {
 	else{
 		woocommerce_page_title();
 	}
-	if($user_role!="wholesale_customer"){
-		echo '<img src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping2.png" />';
-	}
+	
 	echo  '</h1>';
+	echo '<img style="float: right;" src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping_new.png"/>';
+	echo '</div>';
+
+
+
+
+
+
+
+	echo '<div id="primary" class="content-area col-sm-12 col-md-6">';
 	if(is_shop()){
 	$taxonomy     = 'product_cat';
 	$orderby      = 'name';  

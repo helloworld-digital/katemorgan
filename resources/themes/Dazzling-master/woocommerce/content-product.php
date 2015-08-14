@@ -44,15 +44,15 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 ?>
 
 <?php
-global $current_user;
+	global $current_user;
 
-		    $user_roles = $current_user->roles;
-		    $user_role = array_shift($user_roles);
-			if($user_role=="wholesale_customer"){ 
-				if(get_post_meta( get_the_ID(), 'wholesale_customer_have_wholesale_price', true )!= yes){
-					return;
-				}
-			} 
+    $user_roles = $current_user->roles;
+    $user_role = array_shift($user_roles);
+	if($user_role=="wholesale_customer"){
+		if(get_post_meta( get_the_ID(), 'wholesale_customer_have_wholesale_price', true )!= yes){
+			return;
+		}
+	} 
 ?>
 
 
