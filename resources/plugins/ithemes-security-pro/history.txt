@@ -535,3 +535,5 @@
 	Bug Fix: Minor change to fix a warning that can appear after changing the Content Directory.
 	Bug Fix: Fixed a PHP fatal error that could occur on some servers when adding a ban to the site's .htaccess or nginx.conf file.
 	Bug Fix: Fixed some issues with profile pages on multisite setups that affected both two factor authentication and the password generator.
+1.17.1 - 2015-08-17 - Chris Jean
+	Bug Fix: Fixed "Call to undefined function get_home_path()" error.

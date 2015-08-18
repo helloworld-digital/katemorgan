@@ -91,7 +91,9 @@ function dazzling_wrapper_start() {
 	}
 	
 	echo  '</h1>';
+	if(is_shop()){
 	echo '<img style="float: right;" src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping_new.png"/>';
+}
 	echo '</div>';
 
 
@@ -138,6 +140,10 @@ function dazzling_wrapper_start() {
 	}
 
 	echo "</span>";
+}
+
+else{
+	echo '<img src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping_new.png"/>';
 }
 	echo '</div></div></div>';
 	echo '<div class="site-content container">';

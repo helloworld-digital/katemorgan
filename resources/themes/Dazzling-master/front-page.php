@@ -21,14 +21,22 @@ get_header(); ?>
           $active=''; 
         } ?>
         <div class="<?php echo $active; ?> item" style='background-image: url(<?php the_sub_field('slide_image'); ?>); background-position: top center;'>
-	<div class="container" style="width: 67%;">
+	<div class="container" style="width: 67%; max-width: 1170px;">
 	<div class="row">
 	<div class="col-md-6">
         <p style="height: 350px;display: table-cell;vertical-align: middle;font-size: 40px;text-align: center;color: white;line-height: 50px;"><?php the_sub_field('slide_text'); $x++; ?></p>
 	</div>
 <div class="col-md-6" style="text-align: right;">
 <?php if (get_sub_field('offer_image')){ ?>
+<?php if (get_sub_field('offer_link')){ ?>
+	<a href="<?php the_sub_field('offer_link');?>">
+<?php } ?>
 <img style="margin-top: 30px;box-shadow: 6px 6px 17px #888888;" src="<?php the_sub_field('offer_image'); ?>" />
+
+<?php if (get_sub_field('offer_link')){ ?>
+	</a>
+<?php } ?>
+
 <?php } ?>
 </div>
 	</div>

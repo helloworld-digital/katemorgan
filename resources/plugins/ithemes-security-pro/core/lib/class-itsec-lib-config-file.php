@@ -684,6 +684,8 @@ class ITSEC_Lib_Config_File {
 			return '';
 		}
 		
+		require_once( ABSPATH . 'wp-admin/includes/file.php' );
+		
 		$home_path = get_home_path();
 		$file_path = $home_path . $file;
 		$file_path = apply_filters( 'itsec_filter_server_config_file_path', $file_path, $file );
