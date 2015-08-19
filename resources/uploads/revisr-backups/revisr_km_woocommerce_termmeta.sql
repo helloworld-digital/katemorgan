@@ -20,12 +20,12 @@ CREATE TABLE `km_woocommerce_termmeta` (
   PRIMARY KEY (`meta_id`),
   KEY `woocommerce_term_id` (`woocommerce_term_id`),
   KEY `meta_key` (`meta_key`)
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `km_woocommerce_termmeta` WRITE;
 /*!40000 ALTER TABLE `km_woocommerce_termmeta` DISABLE KEYS */;
-INSERT INTO `km_woocommerce_termmeta` VALUES (1,6,'order','2'),(2,6,'display_type',''),(3,6,'thumbnail_id','240'),(4,7,'order','4'),(5,7,'display_type',''),(6,7,'thumbnail_id','300'),(24,15,'thumbnail_id','667'),(23,15,'display_type',''),(10,9,'order','5'),(11,9,'display_type',''),(12,9,'thumbnail_id','552'),(13,10,'order','3'),(14,10,'display_type',''),(15,10,'thumbnail_id','297'),(31,15,'product_count_product_cat','4'),(19,6,'product_count_product_cat','14'),(20,7,'product_count_product_cat','4'),(32,9,'product_count_product_cat','1'),(22,15,'order','1'),(28,17,'order','6'),(29,17,'display_type',''),(30,17,'thumbnail_id','560'),(33,10,'product_count_product_cat','2'),(34,17,'product_count_product_cat','5');
+INSERT INTO `km_woocommerce_termmeta` VALUES (1,6,'order','2'),(2,6,'display_type',''),(3,6,'thumbnail_id','240'),(4,7,'order','4'),(5,7,'display_type',''),(6,7,'thumbnail_id','300'),(24,15,'thumbnail_id','667'),(23,15,'display_type',''),(10,9,'order','5'),(11,9,'display_type',''),(12,9,'thumbnail_id','552'),(13,10,'order','3'),(14,10,'display_type',''),(15,10,'thumbnail_id','297'),(31,15,'product_count_product_cat','5'),(19,6,'product_count_product_cat','14'),(20,7,'product_count_product_cat','4'),(32,9,'product_count_product_cat','1'),(22,15,'order','1'),(28,17,'order','6'),(29,17,'display_type',''),(30,17,'thumbnail_id','560'),(33,10,'product_count_product_cat','2'),(34,17,'product_count_product_cat','5');
 /*!40000 ALTER TABLE `km_woocommerce_termmeta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

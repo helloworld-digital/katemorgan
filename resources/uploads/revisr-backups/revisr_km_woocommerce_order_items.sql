@@ -19,12 +19,12 @@ CREATE TABLE `km_woocommerce_order_items` (
   `order_id` bigint(20) NOT NULL,
   PRIMARY KEY (`order_item_id`),
   KEY `order_id` (`order_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `km_woocommerce_order_items` WRITE;
 /*!40000 ALTER TABLE `km_woocommerce_order_items` DISABLE KEYS */;
-INSERT INTO `km_woocommerce_order_items` VALUES (1,'European Crème Chocolate Meal Replacement','line_item',63),(2,'Free Shipping','shipping',63),(3,'Standard starter pack','line_item',64),(4,'Free Shipping','shipping',64),(5,'Serious commitment pack (no cappuccino)','line_item',67),(6,'Free Shipping','shipping',67),(7,'Pine Lime Meal Replacement Shake 52g','line_item',345),(8,'Free Shipping','shipping',345),(9,'Vanilla Shake 52g','line_item',850),(10,'8 week Serious Commitment Pack','line_item',850),(11,'Free Shipping','shipping',850);
+INSERT INTO `km_woocommerce_order_items` VALUES (1,'European Crème Chocolate Meal Replacement','line_item',63),(2,'Free Shipping','shipping',63),(3,'Standard starter pack','line_item',64),(4,'Free Shipping','shipping',64),(5,'Serious commitment pack (no cappuccino)','line_item',67),(6,'Free Shipping','shipping',67),(7,'Pine Lime Meal Replacement Shake 52g','line_item',345),(8,'Free Shipping','shipping',345),(9,'Vanilla Shake 52g','line_item',850),(10,'8 week Serious Commitment Pack','line_item',850),(11,'Free Shipping','shipping',850),(27,'Express','shipping',969),(26,'Vanilla Shake 52g','line_item',969),(25,'Cappuccino Pack x 14 Shakes','line_item',969),(24,'Cappuccino Shake 52g','line_item',969),(28,'TESTING SUPER CHEAP PRODUCT','line_item',977),(29,'Normal','shipping',977),(30,'TESTING SUPER CHEAP PRODUCT','line_item',984),(31,'Free Shipping','shipping',984),(34,'TESTING SUPER CHEAP PRODUCT','line_item',988),(35,'Normal','shipping',988),(36,'TESTING SUPER CHEAP PRODUCT','line_item',989),(37,'4 Week Starter Pack x 56 Shakes','line_item',989),(38,'Normal','shipping',989),(39,'TESTING SUPER CHEAP PRODUCT','line_item',991),(40,'Free Shipping','shipping',991);
 /*!40000 ALTER TABLE `km_woocommerce_order_items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

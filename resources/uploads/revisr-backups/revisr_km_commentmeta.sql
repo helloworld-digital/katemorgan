@@ -20,12 +20,12 @@ CREATE TABLE `km_commentmeta` (
   PRIMARY KEY (`meta_id`),
   KEY `comment_id` (`comment_id`),
   KEY `meta_key` (`meta_key`(191))
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `km_commentmeta` WRITE;
 /*!40000 ALTER TABLE `km_commentmeta` DISABLE KEYS */;
-INSERT INTO `km_commentmeta` VALUES (16,17,'is_customer_note','0'),(15,16,'is_customer_note','0'),(14,15,'is_customer_note','0'),(11,12,'is_customer_note','0'),(12,13,'is_customer_note','0'),(13,14,'is_customer_note','0');
+INSERT INTO `km_commentmeta` VALUES (17,31,'is_customer_note','1'),(16,17,'is_customer_note','0'),(15,16,'is_customer_note','0'),(14,15,'is_customer_note','0'),(11,12,'is_customer_note','0'),(12,13,'is_customer_note','0'),(13,14,'is_customer_note','0');
 /*!40000 ALTER TABLE `km_commentmeta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -24,7 +24,7 @@ CREATE TABLE `km_links` (
   `link_rating` int(11) NOT NULL DEFAULT '0',
   `link_updated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `link_rel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `link_notes` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link_notes` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `link_rss` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`link_id`),
   KEY `link_visible` (`link_visible`)

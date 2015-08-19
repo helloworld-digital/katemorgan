@@ -23,12 +23,12 @@ CREATE TABLE `km_rg_lead_notes` (
   PRIMARY KEY (`id`),
   KEY `lead_id` (`lead_id`),
   KEY `lead_user_key` (`lead_id`,`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `km_rg_lead_notes` WRITE;
 /*!40000 ALTER TABLE `km_rg_lead_notes` DISABLE KEYS */;
-INSERT INTO `km_rg_lead_notes` VALUES (1,68,'Gravity Forms Constant Contact Add-on',0,'2015-08-13 03:17:03','Successfully added/updated in Constant Contact.','note'),(2,69,'Gravity Forms Constant Contact Add-on',0,'2015-08-13 03:18:39','Successfully added/updated in Constant Contact.','note');
+INSERT INTO `km_rg_lead_notes` VALUES (1,68,'Gravity Forms Constant Contact Add-on',0,'2015-08-13 03:17:03','Successfully added/updated in Constant Contact.','note'),(2,69,'Gravity Forms Constant Contact Add-on',0,'2015-08-13 03:18:39','Successfully added/updated in Constant Contact.','note'),(3,77,'Gravity Forms Constant Contact Add-on',0,'2015-08-13 06:33:05','Successfully added/updated in Constant Contact.','note'),(4,78,'Gravity Forms Constant Contact Add-on',0,'2015-08-13 06:34:13','Successfully added/updated in Constant Contact.','note'),(5,79,'Gravity Forms Constant Contact Add-on',0,'2015-08-13 06:35:59','Successfully added/updated in Constant Contact.','note');
 /*!40000 ALTER TABLE `km_rg_lead_notes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
