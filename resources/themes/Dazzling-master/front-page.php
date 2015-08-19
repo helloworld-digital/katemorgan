@@ -108,7 +108,7 @@ foreach ($all_categories as $cat) {
 <!--Join the program-->
 <?php if( have_rows('join_the_program') ):?>
   <div class="site-content container program">
-    <h2>Join the Program</h2>
+    <h2>Join The Program</h2>
 
     <?php $x =1 ; while ( have_rows('join_the_program') ) : the_row();?>
       <div id="program-<?php echo $x;?>" class="col-sm-4 col-md-4">
@@ -130,7 +130,7 @@ foreach ($all_categories as $cat) {
 <?php if( have_rows('client_slider') ): ?>
 <div class="client-slider">
   <div class="site-content container">
-  <h2>What our Members Say</h2>
+  <h2>What Our Members Say</h2>
     <div class="testimonial slick-slider">
     <?php while ( have_rows('client_slider') ) : the_row();?>
 

@@ -33,6 +33,8 @@ if ( $order ) : ?>
 
 	<?php else : ?>
 
+		<h3>Congratulations, your payment has gone through</h3>
+
 		<p><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></p>
 
 		<ul class="order_details">

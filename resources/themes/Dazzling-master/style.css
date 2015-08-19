@@ -1,3 +1,11 @@
+/*slider test*/
+
+.carousel-control{
+	display:none;
+}
+
+
+
 /*
 Theme Name: Kate Morgan
 Theme URI: http://xmarketing.com.au
@@ -1534,6 +1542,7 @@ a.menu-nav {
 .program p {
     margin-bottom: 30px;
     font-size: 17px;
+	min-height: 112px;
 }
 
 #button,
@@ -2382,6 +2391,11 @@ p.buttons {
 
 .fa-file-pdf-o:before {
 	color: red;
+}
+
+
+.woocommerce-info a{
+	font-weight: bold !important;
 }
 
 /* Responsive */
