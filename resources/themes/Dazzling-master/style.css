@@ -2398,6 +2398,11 @@ p.buttons {
 	font-weight: bold !important;
 }
 
+.purechat.purechat-bottom-right {
+    right: 0 !important;
+    bottom: 0;
+}
+
 /* Responsive */
 
 @media (min-width: 768px) {
