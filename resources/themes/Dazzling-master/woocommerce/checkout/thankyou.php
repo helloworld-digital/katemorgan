@@ -35,7 +35,18 @@ if ( $order ) : ?>
 
 		<h3>Congratulations, your payment has gone through</h3>
 
-		<p><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></p>
+		<!--<p><?php //echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?>-->
+		<p>Hi <?php echo $order->billing_first_name; ?>,</p>
+
+<p>Thank you for placing your online order with us.  Your order number is:  <?php echo $order->get_order_number(); ?></p>
+
+<p>This email confirms details of your order.  All orders are dispatched within 24 hours and a further email will be sent confirming tracking details.</p>
+
+<p>We hope that you enjoyed shopping at Kate Morgan!  If you have any queries please do not hesitate to email admin@katemorgan.com.au . </p>
+
+<p>Yours<br/>
+The Kate Morgan Customer Service Team</p>
+
 
 		<ul class="order_details">
 			<li class="order">

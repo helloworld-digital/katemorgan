@@ -15,7 +15,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php do_action('woocommerce_email_header', $email_heading); ?>
 
-<p><?php _e( "Your order has been received and is now being processed. Your order details are shown below for your reference:", 'woocommerce' ); ?></p>
+<!--<p><?php _e( "Your order has been received and is now being processed. Your order details are shown below for your reference:", 'woocommerce' ); ?></p>-->
+
+<p>Hi <?php echo $order->billing_first_name; ?>,</p>
+
+<p>Thank you for placing your online order with us.  Your order number is:  <?php echo $order->get_order_number(); ?></p>
+
+<p>This email confirms details of your order.  All orders are dispatched within 24 hours and a further email will be sent confirming tracking details.</p>
+
+<p>We hope that you enjoyed shopping at Kate Morgan!  If you have any queries please do not hesitate to email admin@katemorgan.com.au . </p>
+
+<p>Yours<br/>
+The Kate Morgan Customer Service Team</p>
 
 <?php do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text ); ?>
 

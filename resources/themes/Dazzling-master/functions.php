@@ -730,3 +730,37 @@ if (!current_user_can('administrator') && !current_user_can('editor') && !curren
   show_admin_bar(false);
 }
 }
+
+
+
+function cp_add_custom_price( $cart_object ) {
+ 
+    global $woocommerce;
+
+ 	$cart_subtotal = $woocommerce->cart->cart_contents_total;
+
+	
+
+	if($cart_subtotal < 100.00 ) {
+		$postage = 10.00;
+	}
+
+	else if ($cart_subtotal >=100.00){
+		$postage = 0.00;
+	}
+
+
+	$woocommerce->cart->add_fee( 'Standard', $postage, false, '' );
+}
+ 
+add_action( 'woocommerce_cart_calculate_fees', 'cp_add_custom_price' );
+
+function bk_title_order_received( $title, $id ) {
+  if ( is_order_received_page() && get_the_ID() === $id ) {
+    $title = "Your order has been placed";
+  }
+
+  return $title;
+}
+
+add_filter( 'the_title', 'bk_title_order_received', 10, 2 );
