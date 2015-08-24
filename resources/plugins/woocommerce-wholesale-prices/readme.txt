@@ -3,7 +3,7 @@ Contributors: jkohlbach, RymeraWebCo
 Donate link:
 Tags: woocommerce wholesale, wholesale plugin, wholesale prices, wholesale pricing, woocommerce wholesale pricing, woocommerce
 Requires at least: 3.4
-Tested up to: 4.2.2
+Tested up to: 4.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -66,6 +66,14 @@ Plenty of amazing screenshots for this plugin and more over at:
 https://wholesalesuiteplugin.com/product/woocommerce-wholesale-prices-premium/
 
 == Changelog ==
+= 1.1.3 =
+* Improvement: Improve integration to WooCommerce 2.4.x series new "Save Changes" button on the variations section of a variable product
+
+= 1.1.2 =
+* Improvement: Refactor activation code making the plugin more efficient
+* Improvement: Integrate to WooCommerce 2.4.x series new "Save Changes" button on the variations section of a variable product
+* Feature: Add current user wholesale role on the class of the body tag
+
 = 1.1.1 =
 * Bug Fix: Fix price suffix doubling up on variable products
 

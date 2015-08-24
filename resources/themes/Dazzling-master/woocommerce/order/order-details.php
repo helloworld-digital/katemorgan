@@ -134,10 +134,20 @@ $order = wc_get_order( $order_id );
 					$value = '<del>' . strip_tags( $order->get_formatted_order_total() ) . $refunded_tax_del . '</del> <ins>' . wc_price( $order->get_total() - $total_refunded, array( 'currency' => $order->get_order_currency() ) ) . $refunded_tax_ins . '</ins>';
 				}
 				?>
+
+				<?php if ( is_order_received_page() &&  $total['label']=='Postage:'){ ?>
+				<tr style="display: none;">
+					<th scope="row"><?php echo $total['label']; ?></th>
+					<td><?php echo $value; ?></td>
+				</tr>
+
+				<?php } else {?>
 				<tr>
 					<th scope="row"><?php echo $total['label']; ?></th>
 					<td><?php echo $value; ?></td>
 				</tr>
+
+				<?php } ?>
 				<?php
 			}
 		}

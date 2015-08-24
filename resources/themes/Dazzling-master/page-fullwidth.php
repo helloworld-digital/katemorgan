@@ -15,7 +15,7 @@ get_header(); ?>
 			<h1 class="entry-title"><?php the_title(); ?></h1>
 		</div>
 		<div id="primary" class="content-area col-sm-6 col-md-6">
-			<h3>The Kate Morgan Weight Loss Program</h3>
+			<h3>Kate Morgan Weight Loss Program</h3>
 		</div>
 	</div>
 </div>

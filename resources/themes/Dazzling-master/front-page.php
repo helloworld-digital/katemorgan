@@ -13,14 +13,19 @@ get_header(); ?>
       <div class="carousel-inner">
 
       <?php $x=1; while ( have_rows('homepage_slider') ) : the_row(); ?>
-        <?php if ($x==1) 
+        <?php $active=''; if ($x==1) 
         {
           $active='active';
-        } else
-        { 
-          $active=''; 
-        } ?>
+        }
+        ?>
         <div class="<?php echo $active; ?> item" style='background-image: url(<?php the_sub_field('slide_image'); ?>); background-position: top center;'>
+
+          
+        <div class="new_label">Fresh New Website</div>
+
+
+
+
 	<div class="container" style="width: 67%; max-width: 1170px;">
 	<div class="row">
 	<div class="col-md-6">

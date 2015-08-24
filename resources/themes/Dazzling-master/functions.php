@@ -549,12 +549,12 @@ function user_chart (){
     array_push($bmi_array, $obj->BMI);
   }
 
- 
-  echo '<h2>History</h2>';
+
+  echo '<h2>My Progress</h2>';
   echo '<div class="row">';
 
   echo '<div class="col-md-4" style="text-align: center">';
-  echo '<h3>Body Measurement</h3>';
+  echo '<h3>Body Mass Index</h3>';
   echo '<div class="ct-chart-bmi ct-perfect-fourth"></div>';
   echo '</div>';
 
@@ -607,7 +607,7 @@ echo'<table class="BMI_table">';
 	echo '<thead><tr><td><h3>Date</h3></td><td><h3>BMI</h3></td><td><h3>Waist</h3></td><td><h3>Weight</h3></td></tr></thead>';
 	foreach($myrows as $obj){
 		echo '<tr>';
-		echo '<td>'.$obj->date.'</td>';
+		echo '<td>'.DateTime::createFromFormat('Y-m-d', $obj->date)->format('d/m/Y').'</td>';
 		echo '<td>'.$obj->BMI.'</td>';
 		echo '<td>'.$obj->waist.'</td>';
 		echo '<td>'.$obj->weight.'</td>';
@@ -640,7 +640,7 @@ function entry_into_db($entry, $form) {
     $input_height_in_m =  $input_height/100;
     $input_date = rgar( $entry, '2' );
     $input_weight = rgar( $entry, '3' );
-    $input_waist = rgar( $entry, '4' );
+    $input_waist = rgar( $entry, '6' );
     $input_bmi= round($input_weight / pow("$input_height_in_m",2),2);
 
     // add form data to custom database table
@@ -684,6 +684,10 @@ function endo_create_custom_table() {
   dbDelta($sql);
 
 }*/
+
+        
+
+
 
 add_shortcode( 'pharmacies', 'pharmacies_check_shortcode' );
 
@@ -736,18 +740,32 @@ if (!current_user_can('administrator') && !current_user_can('editor') && !curren
 function cp_add_custom_price( $cart_object ) {
  
     global $woocommerce;
+    global $current_user;
 
- 	$cart_subtotal = $woocommerce->cart->cart_contents_total;
+        $user_roles = $current_user->roles;
+        $user_role = array_shift($user_roles);
+        $cart_subtotal = $woocommerce->cart->cart_contents_total;
+  
+    if($user_role!="wholesale_customer"){
 
-	
+    	if($cart_subtotal < 100.00 ) {
+    		$postage = 10.00;
+    	}
 
-	if($cart_subtotal < 100.00 ) {
-		$postage = 10.00;
-	}
+    	else if ($cart_subtotal >=100.00){
+    		$postage = 0.00;
+    	}
+    }
 
-	else if ($cart_subtotal >=100.00){
-		$postage = 0.00;
-	}
+    else{
+      if($cart_subtotal < 300.00 ) {
+        $postage = 25.00;
+      }
+
+      else if ($cart_subtotal >=300.00){
+        $postage = 0.00;
+      }
+    }
 
 
 	$woocommerce->cart->add_fee( 'Standard', $postage, false, '' );
@@ -764,3 +782,150 @@ function bk_title_order_received( $title, $id ) {
 }
 
 add_filter( 'the_title', 'bk_title_order_received', 10, 2 );
+
+add_filter('gettext', 'translate_reply');
+add_filter('ngettext', 'translate_reply');
+
+function translate_reply($translated) {
+$translated = str_ireplace('Shipping', 'Postage', $translated);
+return $translated;
+}
+
+
+/**
+ * Gravity Wiz // Gravity Forms // Populate Date
+ *
+ * Provides the ability to populate a Date field with a modified date based on the current date or a user-submitted date. If the
+ * modified date is based on a user-submitted date, the modified date can only be populated once the form has been submitted.
+ *
+ * @version	  1.3
+ * @author    David Smith <david@gravitywiz.com>
+ * @license   GPL-2.0+
+ * @link      http://gravitywiz.com/populate-dates-gravity-form-fields/
+ */
+class GW_Populate_Date {
+    public function __construct( $args = array() ) {
+        // set our default arguments, parse against the provided arguments, and store for use throughout the class
+        $this->_args = wp_parse_args( $args, array(
+            'form_id'         => false,
+            'target_field_id' => false,
+            'source_field_id' => false,
+            'format'          => 'Y-m-d',
+            'modifier'        => false,
+            'min_date'        => false
+        ) );
+        if( ! $this->_args['form_id'] || ! $this->_args['target_field_id'] ) {
+            return;
+        }
+        // time for hooks
+        add_action( 'init', array( $this, 'init' ) );
+    }
+    public function init() {
+        // make sure we're running the required minimum version of Gravity Forms
+        if( ! property_exists( 'GFCommon', 'version' ) || ! version_compare( GFCommon::$version, '1.8', '>=' ) ) {
+            return;
+        }
+        if( $this->_args['source_field_id'] ) {
+            add_action( 'gform_pre_submission', array( $this, 'populate_date_on_pre_submission' ) );
+        } else {
+            add_filter( 'gform_pre_render', array( $this, 'populate_date_on_pre_render' ) );
+        }
+    }
+    public function populate_date_on_pre_render( $form ) {
+        if( ! $this->is_applicable_form( $form ) ) {
+            return $form;
+        }
+        foreach( $form['fields'] as &$field ) {
+            if( $field['id'] == $this->_args['target_field_id'] ) {
+                $key = sprintf( 'gwpd_%d_%d', $form['id'], $field['id'] );
+                $value = $this->get_modified_date( $field );
+                $field['allowsPrepopulate'] = true;
+                $field['inputName'] = $key;
+                add_filter("gform_field_value_{$key}", create_function( '', 'return \'' . $value . '\';' ) );
+            }
+        }
+        return $form;
+    }
+    public function populate_date_on_pre_submission( $form ) {
+        if( ! $this->is_applicable_form( $form ) ) {
+            return;
+        }
+        foreach( $form['fields'] as &$field ) {
+            if( $field['id'] == $this->_args['target_field_id'] ) {
+                $timestamp = $this->get_source_timestamp( GFFormsModel::get_field( $form, $this->_args['source_field_id'] ) ); 
+                $value = $this->get_modified_date( $field, $timestamp );
+                $_POST[ "input_{$field['id']}" ] = $value;
+            }
+        }
+    }
+    public function get_source_timestamp( $field ) {
+        $raw = rgpost( 'input_' . $field['id'] );
+        if( is_array( $raw ) ) {
+            $raw = array_filter( $raw );
+        }
+        list( $format, $divider ) = $field['dateFormat'] ? array_pad( explode( '_', $field['dateFormat' ] ), 2, 'slash' ) : array( 'mdy', 'slash' );
+        $dividers = array( 'slash' => '/', 'dot' => '.', 'dash' => '-' );
+        if( empty( $raw ) ) {
+            $raw = date( implode( $dividers[ $divider ], str_split( $format ) ) );
+        }
+        $date = ! is_array( $raw ) ? explode( $dividers[ $divider ], $raw ) : $raw;
+        $month = $date[ strpos( $format, 'm' ) ];
+        $day   = $date[ strpos( $format, 'd' ) ];
+        $year  = $date[ strpos( $format, 'y' ) ];
+        $timestamp = mktime( 0, 0, 0, $month, $day, $year );
+        return $timestamp;
+    }
+    public function get_modified_date( $field, $timestamp = false ) {
+        if( ! $timestamp ) {
+            $timestamp = current_time( 'timestamp' );
+        }
+        if( GFFormsModel::get_input_type( $field ) == 'date' ) {
+            list( $format, $divider ) = $field['dateFormat'] ? array_pad( explode( '_', $field['dateFormat' ] ), 2, 'slash' ) : array( 'mdy', 'slash' );
+            $dividers = array( 'slash' => '/', 'dot' => '.', 'dash' => '-' );
+            $format = str_replace( 'y', 'Y', $format );
+            $divider = $dividers[$divider];
+            $format = implode( $divider, str_split( $format ) );
+        } else {
+            $format = $this->_args['format'];
+        }
+        if( $this->_args['modifier'] ) {
+            $timestamp = strtotime( $this->_args['modifier'], $timestamp );
+        }
+        if( $this->_args['min_date'] ) {
+            $min_timestamp = strtotime( $this->_args['min_date'] ) ? strtotime( $this->_args['min_date'] ) : $this->_args['min_date'];
+            if( $min_timestamp > $timestamp ) {
+                $timestamp = $min_timestamp;
+            }
+        }
+        $date = date( $format, $timestamp );
+        return $date;
+    }
+    function is_applicable_form( $form ) {
+        $form_id = isset( $form['id'] ) ? $form['id'] : $form;
+        return $form_id == $this->_args['form_id'];
+    }
+}
+# Configuration
+new GW_Populate_Date( array(
+    'form_id' => 4,
+    'target_field_id' => 2
+) );
+
+add_filter( 'woocommerce_cart_shipping_method_full_label', 'remove_local_pickup_free_label', 10, 2 );
+
+function remove_local_pickup_free_label($full_label, $method){
+
+  global $current_user;
+
+  $user_roles = $current_user->roles;
+  $user_role = array_shift($user_roles);
+  
+  if($user_role!="wholesale_customer"){
+    $full_label = str_replace("Postage","Postage charge $10, or free for orders $100 and over",$full_label);
+  }
+  else{
+    $full_label = str_replace("Postage","Postage charge $25, or free for orders $300 and over",$full_label);
+  }
+  
+  return $full_label;
+}

@@ -27,7 +27,7 @@ class WooCommerceWholeSalePrices {
     private $_wwp_custom_fields;
     private $_wwp_wholesale_prices;
 
-    const VERSION = '1.1.1';
+    const VERSION = '1.1.3';
 
 
 
@@ -110,143 +110,8 @@ class WooCommerceWholeSalePrices {
                                                         array(
                                                             'desc'  =>  __( 'This is the main wholesale user role.' , 'woocommerce-wholesale-prices' ),
                                                             'main'  =>  true
-                                                        ));
+                                                        ) );
         $this->_wwp_wholesale_roles->addCustomCapability( 'wholesale_customer' , 'have_wholesale_price' );
-
-        // Get all wholesale roles
-        $allWholesaleRoles = $this->_wwp_wholesale_roles->getAllRegisteredWholesaleRoles();
-
-        // For each variable products, check each variation, check if it has a valid wholesale price
-        // If so, get the variation id of that variation, then add it as a meta to the main variable product
-        $args = array(
-            'post_type'         =>  'product',
-            'posts_per_page'    =>  -1,
-        );
-
-        $query = new WP_Query( $args );
-
-        while ( $query->have_posts() ) {
-
-            $query->the_post();
-
-            $product = wc_get_product( get_the_ID() );
-
-            // Since we are using add_post_meta, we need to delete that meta first
-            // in order for it not to have a stacked up value.
-            foreach ( $allWholesaleRoles as $roleKey => $role )
-                delete_post_meta( $product->id , $roleKey . '_variations_with_wholesale_price' );
-
-            // Check if current product is a variable product
-            if ( $product->product_type == 'variable' ) {
-
-                // If so, then get all variation of this variable product
-                $varArgs =  array(
-                                'post_type'     =>  'product_variation',
-                                'numberposts'   =>  -1,
-                                'post_parent'   =>  $product->id
-                            );
-
-                $variationQuery = new WP_Query( $varArgs );
-
-                // Variable product loop
-                while ( $variationQuery->have_posts() ) {
-
-                    $variationQuery->the_post();
-
-                    foreach ( $allWholesaleRoles as $roleKey => $role ) {
-
-                        $wholesalePrice = get_post_meta( get_the_ID() , $roleKey.'_wholesale_price' , true );
-
-                        if ( is_numeric( $wholesalePrice ) && $wholesalePrice > 0 )
-                            add_post_meta( $product->id , $roleKey . '_variations_with_wholesale_price' , get_the_ID() );
-
-                    }
-
-                }
-
-                // Meta that serves as the main meta to mark the product if has a valid wholesale price
-                foreach ( $allWholesaleRoles as $roleKey => $role ) {
-
-                    $postMeta = get_post_meta( $product->id , $roleKey . '_variations_with_wholesale_price' );
-
-                    if ( !empty( $postMeta ) )
-                        update_post_meta( $product->id , $roleKey . '_have_wholesale_price' , 'yes' );
-                    else {
-
-                        update_post_meta( $product->id , $roleKey . '_have_wholesale_price' , 'no' );
-
-                        $terms = get_the_terms( $product->id , 'product_cat' );
-                        if ( !is_array( $terms ) )
-                            $terms = array();
-
-                        foreach ( $terms as $term ) {
-
-                            $category_wholesale_prices = get_option( 'taxonomy_' . $term->term_id );
-
-                            if ( is_array( $category_wholesale_prices ) && array_key_exists( $roleKey . '_wholesale_discount' , $category_wholesale_prices ) ) {
-
-                                $curr_discount = $category_wholesale_prices[ $roleKey . '_wholesale_discount' ];
-
-                                if ( !empty( $curr_discount ) ) {
-
-                                    update_post_meta( $product->id , $roleKey . '_have_wholesale_price' , 'yes' );
-                                    break;
-
-                                }
-
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            } elseif ( $product->product_type == 'simple' ) {
-
-                // Meta that serves as the main meta to mark the product if has a valid wholesale price
-                foreach ( $allWholesaleRoles as $roleKey => $role ) {
-
-                    $wholesalePrice = get_post_meta( $product->id , $roleKey.'_wholesale_price' , true );
-
-                    if ( is_numeric( $wholesalePrice ) && $wholesalePrice > 0 )
-                        update_post_meta( $product->id , $roleKey . '_have_wholesale_price' , 'yes' );
-                    else {
-
-                        update_post_meta( $product->id , $roleKey . '_have_wholesale_price' , 'no' );
-
-                        $terms = get_the_terms( $product->id , 'product_cat' );
-                        if ( !is_array( $terms ) )
-                            $terms = array();
-
-                        foreach ( $terms as $term ) {
-
-                            $category_wholesale_prices = get_option( 'taxonomy_' . $term->term_id );
-
-                            if ( is_array( $category_wholesale_prices ) && array_key_exists( $roleKey . '_wholesale_discount' , $category_wholesale_prices ) ) {
-
-                                $curr_discount = $category_wholesale_prices[ $roleKey . '_wholesale_discount' ];
-
-                                if ( !empty( $curr_discount ) ) {
-
-                                    update_post_meta( $product->id , $roleKey . '_have_wholesale_price' , 'yes' );
-                                    break;
-
-                                }
-
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-        }
-
-        wp_reset_postdata();
 
     }
 
@@ -256,30 +121,6 @@ class WooCommerceWholeSalePrices {
      * @since 1.0.0
      */
     public function terminate() {
-
-        // Get all wholesale roles
-        $allWholesaleRoles = $this->_wwp_wholesale_roles->getAllRegisteredWholesaleRoles();
-
-        // Post meta attached to each products
-        $args = array(
-            'post_type'         =>  'product',
-            'posts_per_page'    =>  -1,
-        );
-
-        $query = new WP_Query( $args );
-
-        while ( $query->have_posts() ) {
-
-            $query->the_post();
-
-            foreach ( $allWholesaleRoles as $roleKey => $role ) {
-                delete_post_meta( get_the_ID() , $roleKey . '_variations_with_wholesale_price' );
-                delete_post_meta( get_the_ID() , $roleKey . '_have_wholesale_price' );
-            }
-
-        }
-
-        wp_reset_postdata();
 
         // Remove plugin custom roles and capabilities
         $this->_wwp_wholesale_roles->removeCustomCapability( 'wholesale_customer' , 'have_wholesale_price' );
@@ -549,6 +390,20 @@ class WooCommerceWholeSalePrices {
     public function saveCustomWholesaleFieldsOnQuickEditScreen( $product ) {
 
         $this->_wwp_custom_fields->saveCustomWholesaleFieldsOnQuickEditScreen( $product , $this->_wwp_wholesale_roles->getAllRegisteredWholesaleRoles() );
+
+    }
+
+    /**
+     * Add current user wholesale role, if any, on body tag classes.
+     *
+     * @param $classes
+     * @return array
+     *
+     * @since 1.1.2
+     */
+    public function addWholesaleRoleToBodyClass ( $classes ) {
+
+        return $this->_wwp_wholesale_roles->addWholesaleRoleToBodyClass( $classes );
 
     }
 

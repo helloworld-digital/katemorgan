@@ -4,7 +4,7 @@ Plugin Name:    Woocommerce Wholesale Prices
 Plugin URI:     https://wholesalesuiteplugin.com
 Description:    WooCommerce Extension to Provide Wholesale Prices Functionality
 Author:         Rymera Web Co
-Version:        1.1.1
+Version:        1.1.3
 Author URI:     http://rymera.com.au/
 Text Domain:    woocommerce-wholesale-prices
 */
@@ -59,11 +59,14 @@ if ( in_array( 'woocommerce/woocommerce.php' , apply_filters( 'active_plugins', 
     // Display Product Custom Fields (Variable Product) JS to add fields for new variations
     add_action( 'woocommerce_product_after_variable_attributes_js' , array( $wc_wholesale_prices , 'addVariableProductCustomFieldsJS' ) );
 
-    // Save Product Custom Fields
+    // Save Simple Product Wholesale Prices
     add_action( 'woocommerce_process_product_meta' , array( $wc_wholesale_prices , 'saveSimpleProductCustomFields' ) );
 
-    // Save Product Custom Fields (Variable)
+    // Save Variable Product Wholesale Prices
     add_action( 'woocommerce_process_product_meta_variable' , array( $wc_wholesale_prices , 'saveVariableProductCustomFields' ), 10, 1 );
+
+    // Save Variable Product Wholesale Prices Via Ajax ( Introduced on WooCommerce 2.4 series )
+    add_action( 'woocommerce_ajax_save_product_variations' , array( $wc_wholesale_prices , 'saveVariableProductCustomFields' ) , 10 , 1 );
 
 
 
@@ -80,6 +83,9 @@ if ( in_array( 'woocommerce/woocommerce.php' , apply_filters( 'active_plugins', 
     // The purpose for this is to set the wholesale custom "FORM" fields the value of the existing wholesale custom fields value
     // This is utilized by the wwp-quick-edit.js file
     add_action( 'manage_product_posts_custom_column' , array( $wc_wholesale_prices , 'addCustomWholesaleFieldsMetaDataOnProductListingColumn' ) , 99 , 2 );
+
+    // Add current user wholesale role, if any, on body tag classes.
+    add_filter( 'body_class' , array( $wc_wholesale_prices , 'addWholesaleRoleToBodyClass' ) );
 
 
 

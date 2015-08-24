@@ -77,7 +77,7 @@ if ( $customer_orders ) : ?>
 							}
 
 							$actions['view'] = array(
-								'url'  => $order->get_view_order_url(),
+								'url'  => $order->get_view_order_url()."#myaccount",
 								'name' => __( 'View', 'woocommerce' )
 							);
 

@@ -215,4 +215,24 @@ class WWP_Wholesale_Roles {
 
     }
 
+    /**
+     * Add current user wholesale role, if any, on body tag classes.
+     *
+     * @param $classes
+     * @return array
+     *
+     * @since 1.1.2
+     */
+    public function addWholesaleRoleToBodyClass( $classes ) {
+
+        $wholesaleRole = $this->getUserWholesaleRole();
+
+        if ( is_array( $wholesaleRole ) && !empty( $wholesaleRole ) )
+            foreach ( $wholesaleRole as $role )
+                $classes[] = $role;
+
+        return $classes;
+
+    }
+
 }

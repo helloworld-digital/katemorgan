@@ -2,9 +2,47 @@
 
 .carousel-control{
 	display:none;
+
 }
 
+.ct-label{
+	font-size: 1.1rem;
+	color: black;
+}
 
+.first, .last{
+	clear: none !important;
+}
+.woocommerce-shipping-calculator{
+	display: none;
+}
+
+#shipping_method input[type="checkbox"], #shipping_method input[type="radio"] {
+	float: left;
+	margin-right: 10px;
+}
+
+.new_label{
+    font-size: 18px;      
+    font-family: 'Avenir LT Std 65 Medium';
+    text-align: center;      
+    -webkit-transform: rotate(-45deg);   
+    -moz-transform: rotate(-45deg);   
+    -ms-transform: rotate(-45deg);   
+    -o-transform: rotate(-45deg);   position: relative;   
+    padding: 16px 0;   
+    left: -79px;   
+    top: 79px;   
+    width: 379px;   
+    background-color: #ca2129;                       
+    color: white;         
+    position: absolute;
+
+}
+
+.panel-grid-cell .textwidget h3{
+	font-size:20px;
+}
 
 /*
 Theme Name: Kate Morgan
@@ -290,8 +328,8 @@ input[type="url"],
 input[type="password"],
 input[type="search"],
 textarea {
-    color: #666;
-    border: 1px solid #E8E8E8;
+        color: #676767;
+    border: 1px solid #676767;
     border-radius: 3px;
 }
 
@@ -301,7 +339,7 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 input[type="search"]:focus,
 textarea:focus {
-    color: #111;
+    color: black;
 }
 
 input[type="text"],
@@ -2407,6 +2445,43 @@ p.buttons {
 	display: none !important;
 }
 
+.payment_method_paypal label{
+	display: inline !important;
+}
+
+.woocommerce-cart table.cart td.actions .coupon .input-text {
+	   height: 43px;
+    width: 90px;
+}
+
+.woocommerce-checkout #payment .payment_method_paypal .about_paypal {
+    float: initial !important;
+}
+
+#shipping_method{
+	padding-left: 0px !important;
+}
+.woocommerce table.shop_table td{
+	padding: 6px 12px !important;
+}
+
+.woocommerce ul#shipping_method li{
+	padding: 0px !important;
+}
+
+#pg-810-0, #pg-812-0,#pg-814-0{
+	margin-bottom: 0px !important;
+}
+
+
+.woocommerce ul.cart_list, .woocommerce ul.product_list_widget {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow: auto;
+}
+
 /* Responsive */
 
 @media (min-width: 768px) {
@@ -2431,6 +2506,9 @@ p.buttons {
 }
 
 @media (max-width: 768px) {
+.panel-grid-cell .textwidget table{
+	width: 100% !important;
+}
     .header-title {
         text-align: center;
     }
@@ -2511,7 +2589,7 @@ p.buttons {
 
 
 @media print {
-	nav, .secondary-navbar, .header-title, #breadcrumbs, #footer-area, img{
+	nav, .secondary-navbar, .header-title, #breadcrumbs, #footer-area, img, .pdf{
 		display: none;
 	}
 	table{
@@ -2520,5 +2598,9 @@ p.buttons {
 
 	h2{
 		color: #553588;
+	}
+	table{page-break-after: always;}
+	.panel-grid, h2{
+		margin:0px !important;
 	}	
 }

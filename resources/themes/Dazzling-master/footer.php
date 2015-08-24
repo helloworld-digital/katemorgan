@@ -10,8 +10,9 @@
 	</div><!-- #content -->
 
 	<div id="footer-area">
+		
 		<div class="container footer-inner">
-			<?php get_sidebar( 'footer' ); ?>
+			<?php if (is_front_page()){ get_sidebar( 'footer' ); }?>
 		</div>
 
 		<footer id="colophon" class="site-footer" role="contentinfo">

@@ -373,52 +373,60 @@ class WWP_Custom_Fields {
 
         global $_POST;
 
-        if (isset( $_POST[ 'variable_sku' ] ) ) {
+        if ( isset( $_POST[ 'variable_sku' ] ) ) {
 
-            // We delete this meta in the beggining coz we are using add_post_meta, not update_post_meta below
-            // If we dont delete this, the values will be stacked with the old values
+            // We delete this meta in the beginning coz we are using add_post_meta, not update_post_meta below
+            // If we don't delete this, the values will be stacked with the old values
             // Note: per role
             foreach( $registeredCustomRoles as $roleKey => $role )
                 delete_post_meta( $_POST[ 'post_ID' ] , $roleKey . '_variations_with_wholesale_price' );
 
-            $variable_sku = $_POST['variable_sku'];
-            $variable_post_id = $_POST['variable_post_id'];
+            //$variable_sku = $_POST[ 'variable_sku' ];
+            $variable_post_id = $_POST[ 'variable_post_id' ];
+            $max_loop = max( array_keys( $variable_post_id ) );
 
             $thousand_sep = get_option( 'woocommerce_price_thousand_sep' );
             $decimal_sep = get_option( 'woocommerce_price_decimal_sep' );
 
             foreach( $registeredCustomRoles as $roleKey => $role ) {
 
-                $wholesalePrices = $_POST[$roleKey.'_wholesale_prices'];
+                $wholesalePrices = $_POST[ $roleKey . '_wholesale_prices' ];
 
-                for ( $i = 0; $i < sizeof( $variable_sku ); $i++ ){
-                    $variation_id = (int) $variable_post_id[$i];
-                    if ( isset( $wholesalePrices[$i] ) ) {
+                for ( $i = 0; $i <= $max_loop; $i++ ){
 
-                        $wholesalePrices[$i] = trim(esc_attr( $wholesalePrices[$i] ));
+                    if ( !isset( $variable_post_id[ $i ] ) )
+                        continue;
+
+                    $variation_id = (int) $variable_post_id[ $i ];
+
+                    if ( isset( $wholesalePrices[ $i ] ) ) {
+
+                        $wholesalePrices[ $i ] = trim( esc_attr( $wholesalePrices[ $i ] ) );
 
                         if ( $thousand_sep )
-                            $wholesalePrices[$i] = str_replace( $thousand_sep , '' ,  $wholesalePrices[$i] );
+                            $wholesalePrices[ $i ] = str_replace( $thousand_sep , '' ,  $wholesalePrices[ $i ] );
 
                         if ( $decimal_sep )
-                            $wholesalePrices[$i] = str_replace( $decimal_sep , '.' ,  $wholesalePrices[$i] );
+                            $wholesalePrices[ $i ] = str_replace( $decimal_sep , '.' ,  $wholesalePrices[ $i ] );
 
-                        if(!empty($wholesalePrices[$i])){
-                            if(!is_numeric($wholesalePrices[$i]))
-                                $wholesalePrices[$i] = '';
-                            elseif($wholesalePrices[$i] < 0)
-                                $wholesalePrices[$i] = 0;
+                        if ( !empty( $wholesalePrices[ $i ] ) ) {
+
+                            if ( !is_numeric( $wholesalePrices[ $i ] ) )
+                                $wholesalePrices[ $i ] = '';
+                            elseif ($wholesalePrices[$i] < 0 )
+                                $wholesalePrices[ $i ] = 0;
                             else
-                                $wholesalePrices[$i] = wc_format_decimal($wholesalePrices[$i]);
+                                $wholesalePrices[ $i ] = wc_format_decimal( $wholesalePrices[ $i ] );
+
                         }
 
                         $wholesalePrices[ $i ] = wc_clean( apply_filters( 'wwp_filter_before_save_wholesale_price' , $wholesalePrices[ $i ] , $roleKey , $variation_id , 'variation' ) );
-                        update_post_meta( $variation_id, $roleKey.'_wholesale_price', $wholesalePrices[ $i ] );
+                        update_post_meta( $variation_id , $roleKey . '_wholesale_price' , $wholesalePrices[ $i ] );
 
                         // If it has a valid wholesale price, attach a meta to the parent product that specifies
                         // what are the variation id of the variations that has valid wholesale price
                         // Note: per role
-                        if ( is_numeric( $wholesalePrices[$i] ) && $wholesalePrices[$i] > 0 )
+                        if ( is_numeric( $wholesalePrices[ $i ] ) && $wholesalePrices[ $i ] > 0 )
                             add_post_meta( $_POST[ 'post_ID' ] , $roleKey . '_variations_with_wholesale_price' , $variation_id );
 
                     }
