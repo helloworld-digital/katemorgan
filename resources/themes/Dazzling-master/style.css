@@ -1,3 +1,7 @@
+.fee{
+	display: none !important;
+}
+
 /*slider test*/
 
 .carousel-control{
@@ -1849,7 +1853,7 @@ a.button,
     width: 100%;
     background-color: transparent!important;
     color: #543586 !important;
-    font-size: 25px;
+    font-size: 2rem;
     font-weight: bold;
     text-align: center;
     border: 1px solid #543586;
@@ -2507,6 +2511,9 @@ p.buttons {
 
 @media (max-width: 768px) {
 .panel-grid-cell .textwidget table{
+	width: 100% !important;
+}
+.container{
 	width: 100% !important;
 }
     .header-title {

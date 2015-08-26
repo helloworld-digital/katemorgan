@@ -32,7 +32,7 @@ global $post, $product;
  			$product_cat=wp_get_post_terms( $product->id, 'product_cat' );
  			$flag='';
  			foreach ($product_cat as $cat) {
- 				if($cat->name == "Special"){
+ 				if( get_field('special') ){
  					$flag='style="background-color: #ca2129;"';
  				}
  			}
@@ -41,4 +41,8 @@ global $post, $product;
  		}	
  	?>
 
+	<?php if( get_field('special') && $user_role!="wholesale_customer" ){?>
+
+ 	<label style="position: absolute;right: 3%;background-color: #c82128;color: white;border-radius: 50%;width: 60px;text-align: center;line-height: 20px;font-size: 1.5rem;padding: 10px;top: 10%;">Save <?php echo round( ( ( $product->regular_price - $product->sale_price ) / $product->regular_price ) * 100 )."%"; ?></label>
+	<?php } ?>
 <?php endif; ?>

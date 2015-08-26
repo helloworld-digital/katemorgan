@@ -49,10 +49,14 @@ The Kate Morgan Customer Service Team</p>
 				$i = 0;
 				foreach ( $totals as $total ) {
 					$i++;
-					?><tr>
+					?>
+
+					<?php if ($i != 1){ ?>
+					<tr>
 						<th scope="row" colspan="2" style="text-align:left; border: 1px solid #eee; <?php if ( $i == 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>
 						<td style="text-align:left; border: 1px solid #eee; <?php if ( $i == 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['value']; ?></td>
 					</tr><?php
+					}
 				}
 			}
 		?>

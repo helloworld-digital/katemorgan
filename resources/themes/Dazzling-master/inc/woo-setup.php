@@ -93,10 +93,10 @@ function dazzling_wrapper_start() {
 	echo  '</h1>';
 	if(is_shop()){
 		if($user_role=="wholesale_customer"){
-			echo '<img style="float: right;" src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping_new_pharmacy.png"/>';
+			echo '<img style="float: right;" src="'.get_home_url().'/resources/uploads/2015/08/freeshipping_new_pharmacy.png"/>';
 		}
 		else{
-			echo '<img style="float: right;" src="http://174.121.78.227/~kmxmarketing/resources/uploads/2015/08/freeshipping_new.png"/>';
+			echo '<img style="float: right;" src="'.get_home_url().'/resources/uploads/2015/08/freeshipping_new.png"/>';
 		}
 	}
 	echo '</div>';

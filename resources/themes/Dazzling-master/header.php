@@ -30,10 +30,10 @@
 	<div class="secondary-navbar">
 		<div class="container">
 			<div class="social-media">
-			<a href="https://www.facebook.com/profile.php?id=100008878187652"><i class="fa fa-facebook"></i></a>
-			<a href="https://twitter.com/KateMorganWL"><i class="fa fa-twitter"></i></a>
-			<a href="https://www.youtube.com/channel/UCnETdMUJ_mTgu6AKbyePR4w"><i class="fa fa-youtube-play"></i></a>
-			<a href="https://www.pinterest.com/katem0335/"><i class="fa fa-pinterest"></i></a>
+			<!--<a href="https://www.facebook.com/profile.php?id=100008878187652"><i class="fa fa-facebook"></i></a>-->
+			<!--<a href="https://twitter.com/KateMorganWL"><i class="fa fa-twitter"></i></a>-->
+			<!--<a href="https://www.youtube.com/channel/UCnETdMUJ_mTgu6AKbyePR4w"><i class="fa fa-youtube-play"></i></a>-->
+			<!--<a href="https://www.pinterest.com/katem0335/"><i class="fa fa-pinterest"></i></a>-->
 
 			</div>
 			<?php dazzling_secondary_header_menu(); ?>

@@ -768,7 +768,7 @@ function cp_add_custom_price( $cart_object ) {
     }
 
 
-	$woocommerce->cart->add_fee( 'Standard', $postage, false, '' );
+	$woocommerce->cart->add_fee( 'Postage', $postage, false, '' );
 }
  
 add_action( 'woocommerce_cart_calculate_fees', 'cp_add_custom_price' );
@@ -916,15 +916,29 @@ add_filter( 'woocommerce_cart_shipping_method_full_label', 'remove_local_pickup_
 function remove_local_pickup_free_label($full_label, $method){
 
   global $current_user;
+  global $woocommerce;
+        
+  $cart_subtotal = $woocommerce->cart->cart_contents_total;
 
   $user_roles = $current_user->roles;
   $user_role = array_shift($user_roles);
   
   if($user_role!="wholesale_customer"){
-    $full_label = str_replace("Postage","Postage charge $10, or free for orders $100 and over",$full_label);
+    if($cart_subtotal<100){
+      $full_label = str_replace("Standard Postage","Postage (over $100 free): $10.00",$full_label);
+    }
+    else{
+      $full_label = str_replace("Standard Postage","Postage (over $100 free): $0.00",$full_label);
+    }
   }
   else{
-    $full_label = str_replace("Postage","Postage charge $25, or free for orders $300 and over",$full_label);
+    if($cart_subtotal<300){
+      $full_label = str_replace("Standard Postage","Postage (over $300 free): $25.00",$full_label);
+    }
+    else{
+      $full_label = str_replace("Standard Postage","Postage (over $300 free): $0.00",$full_label);
+    }
+    
   }
   
   return $full_label;

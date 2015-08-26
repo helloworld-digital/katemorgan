@@ -3,7 +3,8 @@
 define( 'DISALLOW_FILE_EDIT', false );
 
 //Do not delete these. Doing so WILL break your site.
-define( 'WP_CONTENT_URL', 'http://174.121.78.227/~kmxmarketing/resources' );
+
+define( 'WP_CONTENT_URL', 'https://katemorgan.com.au/resources' );
 define( 'WP_CONTENT_DIR', '/home/kmxmarketing/public_html/resources' );
 
 /**
