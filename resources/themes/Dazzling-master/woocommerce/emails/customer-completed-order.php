@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <h2><?php printf( __( 'Order #%s', 'woocommerce' ), $order->get_order_number() ); ?></h2>
 
-<table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="#eee">
+<table cellspacing="0" cellpadding="6" style="width: 100%; border: 1px solid #eee;" border="1" bordercolor="black">
 	<thead>
 		<tr>
 			<th scope="col" style="text-align:left; border: 1px solid #eee;"><?php _e( 'Product', 'woocommerce' ); ?></th>
@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</tfoot>
 </table>
-
+<p>Prices include 10% GST</p>
 <?php do_action( 'woocommerce_email_after_order_table', $order, $sent_to_admin, $plain_text ); ?>
 
 <?php do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text ); ?>

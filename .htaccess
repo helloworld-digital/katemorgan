@@ -1,7 +1,7 @@
 # BEGIN iThemes Security - Do not modify or remove this line
 # iThemes Security Config Details: 2
 	# Enable the hide backend feature - Security > Settings > Hide Login Area > Hide Backend
-	RewriteRule ^(/~kmxmarketing/)?xmarketing/?$ /~kmxmarketing/wp-login.php [QSA,L]
+	RewriteRule ^(/)?xmarketing/?$ /wp-login.php [QSA,L]
 
 	# Disable XML-RPC - Security > Settings > WordPress Tweaks > XML-RPC
 	<files xmlrpc.php>
@@ -21,7 +21,7 @@
 		RewriteCond %{REQUEST_METHOD} POST
 		RewriteCond %{REQUEST_URI} /wp-comments-post\.php$
 		RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
-		RewriteCond %{HTTP_REFERER} !^https?://(([^/]+\.)?78\.227|jetpack\.wordpress\.com/jetpack-comment)(/|$) [NC]
+		RewriteCond %{HTTP_REFERER} !^https?://(([^/]+\.)?com\.au|jetpack\.wordpress\.com/jetpack-comment)(/|$) [NC]
 		RewriteRule ^.* - [F]
 	</IfModule>
 # END iThemes Security - Do not modify or remove this line

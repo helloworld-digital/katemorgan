@@ -117,7 +117,10 @@ class WWP_Wholesale_Prices {
 
                 // Crush out existing prices, regular and sale
                 if ( strpos( $price , 'ins') !== false ) {
+                    echo "<!--".$wholesalePriceHTML."-->";
                     $wholesalePriceHTML = str_replace( 'ins' , 'del' , $price );
+                    $wholesalePriceHTML = str_replace( '<del>' , '<del style="display: none;">' , $wholesalePriceHTML );
+                    echo "<!--".$wholesalePriceHTML."-->";
                 } else {
                     $wholesalePriceHTML = str_replace( '<span' , '<del><span' , $price );
                     $wholesalePriceHTML = str_replace( '</span>' , '</span></del>' , $wholesalePriceHTML );

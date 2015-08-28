@@ -462,7 +462,11 @@ function filter_plugin_updates( $value ) {
 	
 	if( $value->response['addon-so-widgets-bundle/addon-so-widgets-bundle.php'] ){
     	unset( $value->response['addon-so-widgets-bundle/addon-so-widgets-bundle.php'] );
-	}	
+	}
+
+  if( $value->response['woocommerce-wholesale-prices/woocommerce-wholesale-prices.plugin.php'] ){
+      unset( $value->response['woocommerce-wholesale-prices/woocommerce-wholesale-prices.plugin.php'] );
+  }
 
     return $value;
 }

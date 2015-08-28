@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 		?>
 	</tfoot>
 </table>
-
+<p>Prices include 10% GST</p>
 <?php do_action( 'woocommerce_email_after_order_table', $order, true, false ); ?>
 
 <?php do_action( 'woocommerce_email_order_meta', $order, true, false ); ?>
