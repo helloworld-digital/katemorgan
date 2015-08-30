@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 1.1.8
+
+    - Fixed issue where form was not reloaded due to incorrect class name
+
 ## 1.1.7
 
 	- Fixed issue where GF character counter was added multiple times on submission

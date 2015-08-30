@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</tfoot>
 </table>
 
-<p>Prices include 10% GST</p>
+<p>Prices include 10% GST (except soups)</p>
 
 <?php do_action( 'woocommerce_email_after_order_table', $order, true, false ); ?>
 

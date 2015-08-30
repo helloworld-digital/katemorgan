@@ -1,10 +1,9 @@
 <?php
-
 /**
  * Plugin Name: GP Reload Form
  * Description: Reload the form following an AJAX submission. Useful in situations where you would like to allow multiple form submission with refreshing the page.
  * Plugin URI: http://gravitywiz.com/
- * Version: 1.1.7
+ * Version: 1.1.8
  * Author: David Smith
  * Author URI: http://gravitywiz.com/
  * License: GPL2
@@ -20,7 +19,7 @@ if(!require_once(dirname($gw_perk_file) . '/safetynet.php'))
 
 class GWReloadForm extends GWPerk {
 
-	public $version = '1.1.7';
+	public $version = '1.1.8';
 
 	protected $min_gf_version = '1.7.10.1';
 

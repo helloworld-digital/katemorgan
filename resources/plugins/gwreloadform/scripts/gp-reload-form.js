@@ -63,7 +63,7 @@ window.GPReloadForm;
                 clearTimeout( self.refreshTimeout );
             }
 
-            self.staticElem.find( '#gforms_confirmation_message_' + self.formId ).replaceWith( self.formHtml );
+            self.staticElem.find( '.gform_confirmation_message_' + self.formId ).replaceWith( self.formHtml );
 
             window[ 'gf_submitting_' + self.formId ] = false;
 
